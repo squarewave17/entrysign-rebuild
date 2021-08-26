@@ -1,10 +1,16 @@
 <template>
-  <div id="nav">
-    <router-link to="/">Home</router-link> |
-    <router-link to="/about">About</router-link>
-  </div>
+  <SideBar />
   <router-view />
 </template>
+
+<script>
+import SideBar from "@/components/SideBar.vue";
+export default {
+  components: {
+    SideBar,
+  },
+};
+</script>
 
 <style>
 #app {
@@ -25,6 +31,10 @@
 }
 
 #nav a.router-link-exact-active {
-  color: #42b983;
+  color: var(--of-primary);
+}
+
+form {
+  text-align: left;
 }
 </style>
