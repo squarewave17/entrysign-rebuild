@@ -1,8 +1,7 @@
 <template>
+  <Header msg="Summary" />
+  <navBar />
   <div class="of-container">
-    <Header msg="Summary" />
-    <navBar />
-
     <form class="of-grid-small" of-grid @submit.prevent="onSubmit">
       <div class="of-width-1-1 of-width-1-2@l">
         <BaseInput
@@ -64,9 +63,9 @@ export default {
     };
   },
   methods: {
-    updateFirstName() {
+    updateFirstName(e) {
       console.log("triggered");
-      this.$store.commit("updateFirstName", this.info.firstName);
+      this.$store.commit("updateFirstName", e.target.value);
     },
   },
 };

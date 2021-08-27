@@ -4,7 +4,7 @@ export default createStore({
   state: {
     orgSize: "",
     firstName: "",
-    LastName: "",
+    lastName: "",
     orgName: "",
     postcode: "",
     contactNumber: "",
@@ -15,6 +15,7 @@ export default createStore({
     buttonShape: "",
     themeColour: "",
     themeStyle: "",
+    logoUpload: "",
   },
   mutations: {
     updateOrgSize(state, orgSize) {
@@ -56,6 +57,9 @@ export default createStore({
     updateThemeStyle(state, themeStyle) {
       state.themeStyle = themeStyle;
     },
+    updatelogo(state, logoUpload) {
+      state.logoUpload = logoUpload;
+    },
   },
   actions: {},
   modules: {},
@@ -73,5 +77,6 @@ export default createStore({
     buttonShape: (state) => state.buttonShape,
     themeColour: (state) => state.themeColour,
     themeStyle: (state) => state.themeStyle,
+    logoUpload: (state) => state.logoUpload,
   },
 });

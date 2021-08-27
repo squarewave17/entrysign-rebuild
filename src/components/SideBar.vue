@@ -4,21 +4,48 @@
     type="button"
     of-toggle="target: #offcanvas-flip"
   >
-    <p>View Build</p>
+    <p>View System</p>
   </button>
 
-  <div id="offcanvas-flip" of-offcanvas="flip: true; overlay: true">
+  <div
+    id="offcanvas-flip"
+    of-offcanvas="flip: true; overlay: false; mode: reveal;"
+  >
     <div class="of-offcanvas-bar">
       <button class="of-offcanvas-close" type="button" of-close></button>
 
-      <h3>Title</h3>
-
-      <p>
-        Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod
-        tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim
-        veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea
-        commodo consequat.
-      </p>
+      <div class="systemBuild">
+        <h4>Your System</h4>
+        Organisation Type: {{ $store.getters.orgSize }}
+        <br />
+        Your Name: {{ $store.getters.firstName }}
+        <br />
+        Your Last Name: {{ $store.getters.lastName }}
+        <br />
+        Organisation Name: {{ $store.getters.orgName }}
+        <br />
+        Postcode: {{ $store.getters.postcode }}
+        <br />
+        Email {{ $store.getters.contactEmail }}
+        <br />
+        Phone {{ $store.getters.contactNumber }}
+        <br />
+        Mount Type: {{ $store.getters.hardwareType }}
+        <br />
+        <strong>Customisation</strong>
+        <br />
+        Layout: {{ $store.getters.layout }}
+        <br />
+        Button Style: {{ $store.getters.buttonFill }}
+        <br />
+        Border Radius: {{ $store.getters.buttonShape }}
+        <br />
+        Page Style: {{ $store.getters.themeStyle }}
+        <br />
+        Logo: {{ $store.getters.logoUpload }}
+        <br />
+        Theme Colour: {{ $store.getters.themeStyle }}
+      </div>
     </div>
   </div>
 </template>
@@ -33,10 +60,32 @@ export default {
 button {
   padding: 10px;
   text-align: center;
+  background-color: var(--of-white);
+}
+button:hover {
+  padding: 10px;
+  text-align: center;
   background-color: var(--of-light);
 }
 button p {
   writing-mode: vertical-rl;
   text-orientation: upright;
+}
+
+button.of-offcanvas-close {
+  background-color: unset;
+  color: var(--of-dark);
+}
+.of-offcanvas-bar {
+  color: var(--of-dark);
+  background: var(--of-light);
+}
+
+h4[data-v-3eca7188] {
+  color: var(--of-dark);
+}
+
+.systemBuild {
+  text-align: left;
 }
 </style>

@@ -1,7 +1,7 @@
 <template>
-  <div class="page-container">
-    <Header msg="Access Door Control" />
-    <navBar />
+  <Header msg="Access Door Control" />
+  <navBar />
+  <div class="of-container">
     <BaseSelect
       :options="adcoptions"
       v-model="info.doorAccess"

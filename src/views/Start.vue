@@ -1,9 +1,23 @@
 <template>
+  <Header msg="Start" />
+  <navBar />
   <div class="of-container">
-    <Header msg="Start" />
-    <navBar />
-    <RadioGroup v-model="orgSize" name="Start" :options="orgOptions" />
-    <div>{{ orgSize }}</div>
+    <BaseRadio
+      v-model="info.orgSize"
+      value="Single"
+      label="Single"
+      name="start"
+      @click="updateOrgSize"
+    />
+    <BaseRadio
+      v-model="info.orgSize"
+      value="Multi"
+      label="Multi"
+      name="start"
+      @click="updateOrgSize"
+    />
+    <div>{{ this.info.orgSize }}</div>
+    <div>{{ this.$store.state.orgSize }}</div>
   </div>
 </template>
 
@@ -11,23 +25,29 @@
 // @ is an alias to /src
 import Header from "@/components/Header.vue";
 import navBar from "@/components/navBar.vue";
-import RadioGroup from "@/components/RadioGroup.vue";
+import BaseRadio from "@/components/BaseRadio.vue";
 
 export default {
   name: "Start",
   components: {
     Header,
     navBar,
-    RadioGroup,
+    BaseRadio,
   },
   data() {
     return {
-      orgSize: "",
-      orgOptions: [
-        { label: "Single Organisation", value: "Single Organisation" },
-        { label: "Multi-Academy Trust", value: "Multi-Academy Trust" },
-      ],
+      info: {
+        orgSize: "",
+      },
     };
+  },
+  methods: {
+    updateOrgSize(e) {
+      console.log("triggered");
+      this.$store.commit("updateOrgSize", e.target.value);
+    },
   },
 };
 </script>
+
+<style scoped></style>
