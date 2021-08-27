@@ -1,23 +1,26 @@
 <template>
   <Header msg="Start" />
   <navBar />
+
   <div class="of-container">
-    <BaseRadio
-      v-model="info.orgSize"
-      value="Single"
-      label="Single"
-      name="start"
-      @click="updateOrgSize"
-    />
-    <BaseRadio
-      v-model="info.orgSize"
-      value="Multi"
-      label="Multi"
-      name="start"
-      @click="updateOrgSize"
-    />
-    <div>{{ this.info.orgSize }}</div>
-    <div>{{ this.$store.state.orgSize }}</div>
+    <div class="of-flex of-flex-center">
+      <ImgRadio
+        v-model="info.orgSize"
+        value="Single"
+        label="Single"
+        name="start"
+        img="OrganisationMan.png"
+        @click="updateOrgSize"
+      />
+      <ImgRadio
+        v-model="info.orgSize"
+        value="Multi"
+        label="Multi"
+        name="start"
+        img="Organisation2.png"
+        @click="updateOrgSize"
+      />
+    </div>
   </div>
 </template>
 
@@ -25,14 +28,16 @@
 // @ is an alias to /src
 import Header from "@/components/Header.vue";
 import navBar from "@/components/navBar.vue";
-import BaseRadio from "@/components/BaseRadio.vue";
+
+import ImgRadio from "@/components/ImgRadio.vue";
 
 export default {
   name: "Start",
   components: {
     Header,
     navBar,
-    BaseRadio,
+
+    ImgRadio,
   },
   data() {
     return {

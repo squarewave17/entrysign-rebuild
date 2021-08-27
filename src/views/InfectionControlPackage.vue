@@ -2,8 +2,20 @@
   <Header msg="Infection Control Package" />
   <navBar />
   <div class="of-container">
-    <ImgRadio v-model="info.radTest" value="Multi" name="start" />
-    <ImgRadio v-model="info.radTest2" value="desk" name="start" />
+    <div class="of-flex of-flex-center">
+      <ImgRadio
+        v-model="info.radTest"
+        value="Multi"
+        name="start"
+        img="OrganisationMan.png"
+      />
+      <ImgRadio
+        v-model="info.radTest2"
+        value="desk"
+        name="start"
+        img="Organisation2.png"
+      />
+    </div>
   </div>
 </template>
 

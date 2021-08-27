@@ -44,7 +44,7 @@
         <br />
         Logo: {{ $store.getters.logoUpload }}
         <br />
-        Theme Colour: {{ $store.getters.themeStyle }}
+        Theme Colour: {{ $store.getters.themeColour }}
       </div>
     </div>
   </div>

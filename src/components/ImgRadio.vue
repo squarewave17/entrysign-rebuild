@@ -1,14 +1,17 @@
 <template>
-  <input
-    type="radio"
-    :checked="modelValue === value"
-    :value="value"
-    v-bind="$attrs"
-    @change="$emit('update:modelValue', value)"
-  /><label>
-    <img
-      src="http://townandcountryremovals.com/wp-content/uploads/2013/10/firefox-logo-200x200.png"
-  /></label>
+  <label>
+    <input
+      type="radio"
+      :checked="modelValue === value"
+      :value="value"
+      v-bind="$attrs"
+      @change="$emit('update:modelValue', value)"
+    />
+    <div class="imgWrap">
+      <img :src="require(`@/assets/${img}`)" />
+      <h4>{{ label }}</h4>
+    </div></label
+  >
 </template>
 
 <script>
@@ -26,29 +29,42 @@ export default {
       type: String,
       required: true,
     },
+    img: {
+      type: String,
+      required: true,
+    },
   },
 };
 </script>
 
 <style scoped>
 input[type="radio"] {
-  /* display: none; */
+  display: none;
 }
 
-label {
-  border: 1px solid #fff;
+.imgWrap {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  border: 2px solid #fff;
+  border-radius: 10px;
   padding: 10px;
-  display: block;
   position: relative;
   margin: 10px;
+  width: 400px;
+  transition-duration: 0.2s;
+  transform-origin: 50% 50%;
   cursor: pointer;
 }
 
-label:before {
+img {
+}
+
+.imgWrap:before {
   background-color: white;
   color: white;
   content: " ";
-  display: block;
   border-radius: 50%;
   border: 1px solid grey;
   position: absolute;
@@ -62,24 +78,18 @@ label:before {
   transform: scale(0);
 }
 
-label img {
-  height: 100px;
-  width: 100px;
-  transition-duration: 0.2s;
-  transform-origin: 50% 50%;
+input[type="radio"]:checked + .imgWrap {
+  border-color: var(--of-light);
+  background-color: var(--of-light);
 }
 
-:checked + label {
-  border-color: #ddd;
-}
-
-:checked + label:before {
+input[type="radio"]:checked + .imgWrap:before {
   content: "✓";
   background-color: grey;
   transform: scale(1);
 }
 
-:checked + label img {
+input[type="radio"]:checked + .imgWrap {
   transform: scale(0.9);
   /* box-shadow: 0 0 5px #333; */
   z-index: -1;

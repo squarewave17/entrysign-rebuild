@@ -1,6 +1,7 @@
 <template>
   <Header msg="Customise" />
   <navBar />
+  <Customiser />
   <div class="of-container">
     <form class="of-grid-small" of-grid>
       <div class="of-width-1-1 of-width-1-2@l">
@@ -62,6 +63,7 @@ import Header from "@/components/Header.vue";
 import navBar from "@/components/navBar.vue";
 import BaseInput from "@/components/BaseInput.vue";
 import BaseSelect from "@/components/BaseSelect.vue";
+import Customiser from "@/components/Customiser.vue";
 
 export default {
   name: "Home",
@@ -70,6 +72,7 @@ export default {
     navBar,
     BaseInput,
     BaseSelect,
+    Customiser,
   },
   data() {
     return {

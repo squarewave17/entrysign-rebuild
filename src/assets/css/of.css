@@ -1764,6 +1764,13 @@ html {
 body {
   margin: 0;
 }
+
+/* Box sizing rules */
+*,
+*::before,
+*::after {
+  box-sizing: border-box;
+}
 /* Links
  ========================================================================== */
 /*
