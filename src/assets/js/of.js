@@ -2,10 +2,10 @@
   typeof exports === "object" && typeof module !== "undefined"
     ? (module.exports = factory())
     : typeof define === "function" && define.amd
-    ? define("uikit", factory)
+    ? define("OFKit", factory)
     : ((global =
         typeof globalThis !== "undefined" ? globalThis : global || self),
-      (global.UIkit = factory()));
+      (global.OFKit = factory()));
 })(this, function () {
   "use strict";
 
@@ -2889,10 +2889,10 @@
     getViewportClientHeight: getViewportClientHeight,
   });
 
-  function globalAPI(UIkit) {
-    var DATA = UIkit.data;
+  function globalAPI(OFKit) {
+    var DATA = OFKit.data;
 
-    UIkit.use = function (plugin) {
+    OFKit.use = function (plugin) {
       if (plugin.installed) {
         return;
       }
@@ -2903,17 +2903,17 @@
       return this;
     };
 
-    UIkit.mixin = function (mixin, component) {
+    OFKit.mixin = function (mixin, component) {
       component =
-        (isString(component) ? UIkit.component(component) : component) || this;
+        (isString(component) ? OFKit.component(component) : component) || this;
       component.options = mergeOptions(component.options, mixin);
     };
 
-    UIkit.extend = function (options) {
+    OFKit.extend = function (options) {
       options = options || {};
 
       var Super = this;
-      var Sub = function UIkitComponent(options) {
+      var Sub = function OFKitComponent(options) {
         this._init(options);
       };
 
@@ -2927,7 +2927,7 @@
       return Sub;
     };
 
-    UIkit.update = function (element, e) {
+    OFKit.update = function (element, e) {
       element = element ? toNode(element) : document.body;
 
       parents(element)
@@ -2941,7 +2941,7 @@
     };
 
     var container;
-    Object.defineProperty(UIkit, "container", {
+    Object.defineProperty(OFKit, "container", {
       get: function () {
         return container || document.body;
       },
@@ -2964,8 +2964,8 @@
     }
   }
 
-  function hooksAPI(UIkit) {
-    UIkit.prototype._callHook = function (hook) {
+  function hooksAPI(OFKit) {
+    OFKit.prototype._callHook = function (hook) {
       var this$1 = this;
 
       var handlers = this.$options[hook];
@@ -2977,7 +2977,7 @@
       }
     };
 
-    UIkit.prototype._callConnected = function () {
+    OFKit.prototype._callConnected = function () {
       if (this._connected) {
         return;
       }
@@ -2997,7 +2997,7 @@
       this._callUpdate();
     };
 
-    UIkit.prototype._callDisconnected = function () {
+    OFKit.prototype._callDisconnected = function () {
       if (!this._connected) {
         return;
       }
@@ -3011,7 +3011,7 @@
       delete this._watch;
     };
 
-    UIkit.prototype._callUpdate = function (e) {
+    OFKit.prototype._callUpdate = function (e) {
       var this$1 = this;
       if (e === void 0) e = "update";
 
@@ -3038,7 +3038,7 @@
       this._updates.add(e.type || e);
     };
 
-    UIkit.prototype._callWatches = function () {
+    OFKit.prototype._callWatches = function () {
       var this$1 = this;
 
       if (this._watch) {
@@ -3115,10 +3115,10 @@
     }
   }
 
-  function stateAPI(UIkit) {
+  function stateAPI(OFKit) {
     var uid = 0;
 
-    UIkit.prototype._init = function (options) {
+    OFKit.prototype._init = function (options) {
       options = options || {};
       options.data = normalizeData(options, this.constructor.options);
 
@@ -3137,7 +3137,7 @@
       }
     };
 
-    UIkit.prototype._initData = function () {
+    OFKit.prototype._initData = function () {
       var ref = this.$options;
       var data = ref.data;
       if (data === void 0) data = {};
@@ -3147,7 +3147,7 @@
       }
     };
 
-    UIkit.prototype._initMethods = function () {
+    OFKit.prototype._initMethods = function () {
       var ref = this.$options;
       var methods = ref.methods;
 
@@ -3158,7 +3158,7 @@
       }
     };
 
-    UIkit.prototype._initComputeds = function () {
+    OFKit.prototype._initComputeds = function () {
       var ref = this.$options;
       var computed = ref.computed;
 
@@ -3171,7 +3171,7 @@
       }
     };
 
-    UIkit.prototype._initProps = function (props) {
+    OFKit.prototype._initProps = function (props) {
       var key;
 
       props = props || getProps(this.$options, this.$name);
@@ -3190,7 +3190,7 @@
       }
     };
 
-    UIkit.prototype._initEvents = function () {
+    OFKit.prototype._initEvents = function () {
       var this$1 = this;
 
       this._events = [];
@@ -3211,18 +3211,18 @@
       }
     };
 
-    UIkit.prototype._unbindEvents = function () {
+    OFKit.prototype._unbindEvents = function () {
       this._events.forEach(function (unbind) {
         return unbind();
       });
       delete this._events;
     };
 
-    UIkit.prototype._initObservers = function () {
+    OFKit.prototype._initObservers = function () {
       this._observers = [initChildListObserver(this), initPropsObserver(this)];
     };
 
-    UIkit.prototype._disconnectObservers = function () {
+    OFKit.prototype._disconnectObservers = function () {
       this._observers.forEach(function (observer) {
         return observer && observer.disconnect();
       });
@@ -3468,14 +3468,14 @@
     }
   }
 
-  function instanceAPI(UIkit) {
-    var DATA = UIkit.data;
+  function instanceAPI(OFKit) {
+    var DATA = OFKit.data;
 
-    UIkit.prototype.$create = function (component, element, data) {
-      return UIkit[component](element, data);
+    OFKit.prototype.$create = function (component, element, data) {
+      return OFKit[component](element, data);
     };
 
-    UIkit.prototype.$mount = function (el) {
+    OFKit.prototype.$mount = function (el) {
       var ref = this.$options;
       var name = ref.name;
 
@@ -3496,12 +3496,12 @@
       }
     };
 
-    UIkit.prototype.$reset = function () {
+    OFKit.prototype.$reset = function () {
       this._callDisconnected();
       this._callConnected();
     };
 
-    UIkit.prototype.$destroy = function (removeEl) {
+    OFKit.prototype.$destroy = function (removeEl) {
       if (removeEl === void 0) removeEl = false;
 
       var ref = this.$options;
@@ -3529,23 +3529,23 @@
       }
     };
 
-    UIkit.prototype.$emit = function (e) {
+    OFKit.prototype.$emit = function (e) {
       this._callUpdate(e);
     };
 
-    UIkit.prototype.$update = function (element, e) {
+    OFKit.prototype.$update = function (element, e) {
       if (element === void 0) element = this.$el;
 
-      UIkit.update(element, e);
+      OFKit.update(element, e);
     };
 
-    UIkit.prototype.$getComponent = UIkit.getComponent;
+    OFKit.prototype.$getComponent = OFKit.getComponent;
 
     var componentName = memoize(function (name) {
-      return UIkit.prefix + hyphenate(name);
+      return OFKit.prefix + hyphenate(name);
     });
-    Object.defineProperties(UIkit.prototype, {
-      $container: Object.getOwnPropertyDescriptor(UIkit, "container"),
+    Object.defineProperties(OFKit.prototype, {
+      $container: Object.getOwnPropertyDescriptor(OFKit, "container"),
 
       $name: {
         get: function () {
@@ -3555,30 +3555,30 @@
     });
   }
 
-  function componentAPI(UIkit) {
-    var DATA = UIkit.data;
+  function componentAPI(OFKit) {
+    var DATA = OFKit.data;
 
     var components = {};
 
-    UIkit.component = function (name, options) {
+    OFKit.component = function (name, options) {
       var id = hyphenate(name);
 
       name = camelize(id);
 
       if (!options) {
         if (isPlainObject(components[name])) {
-          components[name] = UIkit.extend(components[name]);
+          components[name] = OFKit.extend(components[name]);
         }
 
         return components[name];
       }
 
-      UIkit[name] = function (element, data) {
+      OFKit[name] = function (element, data) {
         var i = arguments.length,
           argsArray = Array(i);
         while (i--) argsArray[i] = arguments[i];
 
-        var component = UIkit.component(name);
+        var component = OFKit.component(name);
 
         return component.options.functional
           ? new component({
@@ -3589,7 +3589,7 @@
           : $$(element).map(init)[0];
 
         function init(element) {
-          var instance = UIkit.getComponent(element, name);
+          var instance = OFKit.getComponent(element, name);
 
           if (instance) {
             if (!data) {
@@ -3608,26 +3608,26 @@
       opt.name = name;
 
       if (opt.install) {
-        opt.install(UIkit, opt, name);
+        opt.install(OFKit, opt, name);
       }
 
-      if (UIkit._initialized && !opt.functional) {
+      if (OFKit._initialized && !opt.functional) {
         fastdom.read(function () {
-          return UIkit[name]("[of-" + id + "],[data-of-" + id + "]");
+          return OFKit[name]("[of-" + id + "],[data-of-" + id + "]");
         });
       }
 
       return (components[name] = isPlainObject(options) ? opt : options);
     };
 
-    UIkit.getComponents = function (element) {
+    OFKit.getComponents = function (element) {
       return (element && element[DATA]) || {};
     };
-    UIkit.getComponent = function (element, name) {
-      return UIkit.getComponents(element)[name];
+    OFKit.getComponent = function (element, name) {
+      return OFKit.getComponents(element)[name];
     };
 
-    UIkit.connect = function (node) {
+    OFKit.connect = function (node) {
       if (node[DATA]) {
         for (var name in node[DATA]) {
           node[DATA][name]._callConnected();
@@ -3638,12 +3638,12 @@
         var name$1 = getComponentName(node.attributes[i].name);
 
         if (name$1 && name$1 in components) {
-          UIkit[name$1](node);
+          OFKit[name$1](node);
         }
       }
     };
 
-    UIkit.disconnect = function (node) {
+    OFKit.disconnect = function (node) {
       for (var name in node[DATA]) {
         node[DATA][name]._callDisconnected();
       }
@@ -3656,23 +3656,23 @@
       : false;
   });
 
-  var UIkit = function (options) {
+  var OFKit = function (options) {
     this._init(options);
   };
 
-  UIkit.util = util;
-  UIkit.data = "__uikit__";
-  UIkit.prefix = "of-";
-  UIkit.options = {};
-  UIkit.version = "3.6.22";
+  OFKit.util = util;
+  OFKit.data = "__OFKit__";
+  OFKit.prefix = "of-";
+  OFKit.options = {};
+  OFKit.version = "3.6.22";
 
-  globalAPI(UIkit);
-  hooksAPI(UIkit);
-  stateAPI(UIkit);
-  componentAPI(UIkit);
-  instanceAPI(UIkit);
+  globalAPI(OFKit);
+  hooksAPI(OFKit);
+  stateAPI(OFKit);
+  componentAPI(OFKit);
+  instanceAPI(OFKit);
 
-  function Core(UIkit) {
+  function Core(OFKit) {
     if (!inBrowser) {
       return;
     }
@@ -3687,7 +3687,7 @@
       fastdom.write(function () {
         return (pendingResize = false);
       });
-      UIkit.update(null, "resize");
+      OFKit.update(null, "resize");
     };
 
     on(window, "load resize", handleResize);
@@ -3711,7 +3711,7 @@
           return (pending = false);
         });
 
-        UIkit.update(null, e.type);
+        OFKit.update(null, e.type);
       },
       { passive: true, capture: true }
     );
@@ -3785,9 +3785,9 @@
       : "Down";
   }
 
-  function boot(UIkit) {
-    var connect = UIkit.connect;
-    var disconnect = UIkit.disconnect;
+  function boot(OFKit) {
+    var connect = OFKit.connect;
+    var disconnect = OFKit.disconnect;
 
     if (!inBrowser || !window.MutationObserver) {
       return;
@@ -3812,7 +3812,7 @@
         subtree: true,
       });
 
-      UIkit._initialized = true;
+      OFKit._initialized = true;
     });
 
     function applyChildListMutation(ref) {
@@ -3834,16 +3834,16 @@
 
       var name = getComponentName(attributeName);
 
-      if (!name || !(name in UIkit)) {
+      if (!name || !(name in OFKit)) {
         return;
       }
 
       if (hasAttr(target, attributeName)) {
-        UIkit[name](target);
+        OFKit[name](target);
         return;
       }
 
-      var component = UIkit.getComponent(target, name);
+      var component = OFKit.getComponent(target, name);
 
       if (component) {
         component.$destroy();
@@ -5970,8 +5970,8 @@
   };
 
   var parsed = {};
-  function install$3(UIkit) {
-    UIkit.icon.add = function (name, svg) {
+  function install$3(OFKit) {
+    OFKit.icon.add = function (name, svg) {
       var obj;
 
       var added = isString(name) ? ((obj = {}), (obj[name] = svg), obj) : name;
@@ -5980,9 +5980,9 @@
         delete parsed[name];
       });
 
-      if (UIkit._initialized) {
+      if (OFKit._initialized) {
         apply$1(document.body, function (el) {
-          return each(UIkit.getComponents(el), function (cmp) {
+          return each(OFKit.getComponents(el), function (cmp) {
             cmp.$options.isIcon && cmp.icon in added && cmp.$reset();
           });
         });
@@ -8605,13 +8605,13 @@
 
   // register components
   each(components$1, function (component, name) {
-    return UIkit.component(name, component);
+    return OFKit.component(name, component);
   });
 
   // core functionality
-  UIkit.use(Core);
+  OFKit.use(Core);
 
-  boot(UIkit);
+  boot(OFKit);
 
   var countdown = {
     mixins: [Class],
@@ -8817,7 +8817,7 @@
 
       css(children(target), { opacity: 0 });
 
-      // Ensure UIkit updates have propagated
+      // Ensure OFKit updates have propagated
       return new Promise$1(function (resolve) {
         return requestAnimationFrame(function () {
           var nodes = children(target);
@@ -10710,12 +10710,12 @@
     },
   };
 
-  function install$1(UIkit, Lightbox) {
-    if (!UIkit.lightboxPanel) {
-      UIkit.component("lightboxPanel", LightboxPanel);
+  function install$1(OFKit, Lightbox) {
+    if (!OFKit.lightboxPanel) {
+      OFKit.component("lightboxPanel", LightboxPanel);
     }
 
-    assign(Lightbox.props, UIkit.component("lightboxPanel").options.props);
+    assign(Lightbox.props, OFKit.component("lightboxPanel").options.props);
   }
 
   function toItem(el) {
@@ -10865,10 +10865,10 @@
     },
   };
 
-  function install(UIkit) {
-    UIkit.notification.closeAll = function (group, immediate) {
+  function install(OFKit) {
+    OFKit.notification.closeAll = function (group, immediate) {
       apply$1(document.body, function (el) {
-        var notification = UIkit.getComponent(el, "notification");
+        var notification = OFKit.getComponent(el, "notification");
         if (notification && (!group || group === notification.group)) {
           notification.close(immediate);
         }
@@ -12921,8 +12921,8 @@
   });
 
   each(components, function (component, name) {
-    return UIkit.component(name, component);
+    return OFKit.component(name, component);
   });
 
-  return UIkit;
+  return OFKit;
 });

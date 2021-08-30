@@ -76,14 +76,9 @@ export default {
   },
   data() {
     return {
-      layoutOptions: [
-        "Horizontal",
-        "Vertical",
-        "Horizontal two columns",
-        "Vertical two columns",
-      ],
+      layoutOptions: ["Vertical", "Horizontal"],
       buttonFills: ["Outline", "Solid"],
-      buttonShapes: ["Square", "Rounded", "Circle"],
+      buttonShapes: ["Rectangle", "Rounded", "Square", "Circle"],
       themeStyles: ["Filled", "Light"],
       info: {
         layout: "",
@@ -97,27 +92,21 @@ export default {
   },
   methods: {
     updateLayout(e) {
-      console.log("triggered");
       this.$store.commit("updateLayout", e.target.value);
     },
     updateButtonFill(e) {
-      console.log("triggered");
       this.$store.commit("updateButtonFill", e.target.value);
     },
     updateButtonShape(e) {
-      console.log("triggered");
       this.$store.commit("updateButtonShape", e.target.value);
     },
     updateThemeColour(e) {
-      console.log("triggered");
       this.$store.commit("updateThemeColour", e.target.value);
     },
     updateThemeStyle(e) {
-      console.log("triggered");
       this.$store.commit("updateThemeStyle", e.target.value);
     },
     updatelogo(e) {
-      console.log("triggered");
       this.$store.commit("updatelogo", e.target.value);
     },
   },
