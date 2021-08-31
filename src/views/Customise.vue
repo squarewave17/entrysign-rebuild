@@ -1,59 +1,62 @@
 <template>
   <Header msg="Customise" />
   <navBar />
-  <Customiser />
-  <div class="of-container">
-    <form class="of-grid-small" of-grid>
-      <div class="of-width-1-1 of-width-1-2@l">
-        <BaseSelect
-          :options="layoutOptions"
-          v-model="info.layout"
-          label="Layout Orientation"
-          @input="updateLayout"
-        />
-      </div>
-      <div class="of-width-1-1 of-width-1-2@l">
-        <BaseSelect
-          :options="buttonFills"
-          v-model="info.buttonFill"
-          label="Button Fill"
-          @input="updateButtonFill"
-        />
-      </div>
-      <div class="of-width-1-1 of-width-1-2@l">
-        <BaseSelect
-          :options="buttonShapes"
-          v-model="info.buttonShape"
-          label="Button Shape"
-          @input="updateButtonShape"
-        />
-      </div>
 
-      <div class="of-width-1-1 of-width-1-2@l">
-        <BaseSelect
-          :options="themeStyles"
-          v-model="info.themeStyle"
-          label="Page Style"
-          @input="updateThemeStyle"
-        />
-      </div>
-      <div class="of-width-1-1 of-width-1-2@l">
-        <BaseInput
-          label="Logo URL"
-          v-model="logoUpload"
-          type="url"
-          @input="updatelogo"
-        />
-      </div>
-      <div class="of-width-1-1 of-width-1-2@l">
-        <BaseInput
-          label="Theme Colour"
-          v-model="themeColour"
-          type="color"
-          @input="updateThemeColour"
-        />
-      </div>
-    </form>
+  <div class="of-container-xlarge customiser-page">
+    <div class="of-form-container of-mx-5">
+      <form class="of-grid-small" of-grid>
+        <div class="of-width-1-1">
+          <BaseSelect
+            :options="layoutOptions"
+            v-model="info.layout"
+            label="Layout Orientation"
+            @input="updateLayout"
+          />
+        </div>
+        <div class="of-width-1-1">
+          <BaseSelect
+            :options="buttonFills"
+            v-model="info.buttonFill"
+            label="Button Fill"
+            @input="updateButtonFill"
+          />
+        </div>
+        <div class="of-width-1-1">
+          <BaseSelect
+            :options="buttonShapes"
+            v-model="info.buttonShape"
+            label="Button Shape"
+            @input="updateButtonShape"
+          />
+        </div>
+
+        <div class="of-width-1-1">
+          <BaseSelect
+            :options="themeStyles"
+            v-model="info.themeStyle"
+            label="Page Style"
+            @input="updateThemeStyle"
+          />
+        </div>
+        <div class="of-width-1-1">
+          <BaseInput
+            label="Logo URL"
+            v-model="logoUpload"
+            type="url"
+            @input="updatelogo"
+          />
+        </div>
+        <div class="of-width-1-1">
+          <BaseInput
+            label="Theme Colour"
+            v-model="themeColour"
+            type="color"
+            @input="updateThemeColour"
+          />
+        </div>
+      </form>
+    </div>
+    <Customiser />
   </div>
 </template>
 
@@ -113,4 +116,14 @@ export default {
 };
 </script>
 
-<style scoped></style>
+<style scoped>
+.customiser-page {
+  margin: auto;
+  display: flex;
+  flex-direction: row;
+  min-height: ;
+}
+.of-form-container {
+  width: 30%;
+}
+</style>

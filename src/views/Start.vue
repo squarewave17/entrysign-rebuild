@@ -3,6 +3,11 @@
   <navBar />
 
   <div class="of-container">
+    <h4 class="of-text-weight-bold">
+      So that we can build your system, we need some information to create your
+      solution.
+    </h4>
+    <p>Are you a single organisation or part of a multi-academy trust?</p>
     <div class="of-flex of-flex-center">
       <ImgRadio
         v-model="info.orgSize"
@@ -22,12 +27,14 @@
       />
     </div>
   </div>
+  <BasicDetails />
 </template>
 
 <script>
 // @ is an alias to /src
 import Header from "@/components/Header.vue";
 import navBar from "@/components/navBar.vue";
+import BasicDetails from "@/components/BasicDetails.vue";
 
 import ImgRadio from "@/components/ImgRadio.vue";
 
@@ -36,6 +43,7 @@ export default {
   components: {
     Header,
     navBar,
+    BasicDetails,
 
     ImgRadio,
   },

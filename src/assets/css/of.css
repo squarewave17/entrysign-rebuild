@@ -2188,7 +2188,7 @@ template {
   content: "960px";
 }
 .of-breakpoint-l::before {
-  content: "1200px";
+  content: "1400px";
 }
 .of-breakpoint-xl::before {
   content: "1600px";
@@ -2196,7 +2196,7 @@ template {
 :root {
   --of-breakpoint-s: 640px;
   --of-breakpoint-m: 960px;
-  --of-breakpoint-l: 1200px;
+  --of-breakpoint-l: 1400px;
   --of-breakpoint-xl: 1600px;
 }
 /* ========================================================================
@@ -4044,7 +4044,7 @@ select.of-form-width-xsmall {
   display: flow-root;
   /* 1 */
   box-sizing: content-box;
-  max-width: 1200px;
+  max-width: 1400px;
   margin-left: auto;
   margin-right: auto;
   padding-left: 15px;
@@ -4083,7 +4083,7 @@ select.of-form-width-xsmall {
   max-width: 750px;
 }
 .of-container-small {
-  max-width: 900px;
+  max-width: 1200px;
 }
 .of-container-large {
   max-width: 1400px;

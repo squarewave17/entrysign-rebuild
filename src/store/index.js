@@ -13,9 +13,10 @@ export default createStore({
     layout: "",
     buttonFill: "Outline",
     buttonShape: "Rectangle",
-    themeColour: "#fc4e01",
+    themeColour: "#888888",
     themeStyle: "Light",
-    logoUpload: "",
+    logoUpload:
+      "https://www.dashmedia.co.uk/wp-content/uploads/2020/08/logo.png",
   },
   mutations: {
     updateOrgSize(state, orgSize) {

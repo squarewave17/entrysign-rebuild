@@ -14,17 +14,20 @@
       </p>
     </div>
     <div of-grid class="of-child-width-expand@s of-text-center">
-      <div>
+      <div class="of-flex of-flex-column">
+        <img class="of-p-8" src="@/assets/Screen1.png" />
         <BaseInput
           label="RFID Terminal"
           v-model="additionalRFID"
           type="number"
         />
       </div>
-      <div>
+      <div class="of-flex of-flex-column">
+        <img class="of-p-8" src="@/assets/deskmount.png" />
         <BaseInput label="Desk Mount" v-model="additionalDM" type="number" />
       </div>
-      <div>
+      <div class="of-flex of-flex-column">
+        <img class="of-p-8" src="@/assets/wallmount.png" />
         <BaseInput label="Wall Mount" v-model="additionalWM" type="number" />
       </div>
     </div>
@@ -55,3 +58,9 @@ export default {
   },
 };
 </script>
+
+<style scoped>
+img {
+  max-width: 365px;
+}
+</style>

@@ -39,22 +39,17 @@ export default {
 div {
   width: 100%;
   border-style: solid;
-  border-width: 2px;
+  border-width: 4px;
 }
-
 .rectangle {
+  margin: 5px 0px;
   grid-area: span 1 / span 4;
   place-self: center;
-  height: 50px;
+  height: 70px;
 }
-.horizontal .rectangle {
-  grid-area: span 1 / span 3;
-}
-
 .rounded {
-  border-radius: 30px;
+  border-radius: 40px;
 }
-
 .square {
   grid-area: span 2 / span 2;
   place-self: center;
@@ -63,10 +58,15 @@ div {
   padding-bottom: 87.5%;
   /* margin: 10px 10px; */
 }
-.horizontal .square {
-  grid-area: span 3 / span 1;
-}
 .circle {
   border-radius: 50%;
+}
+
+/*Horizontal Modifiers*/
+.horizontal .rectangle {
+  grid-area: span 1 / span 3;
+}
+.horizontal .square {
+  grid-area: span 3 / span 1;
 }
 </style>

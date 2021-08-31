@@ -1,5 +1,5 @@
 <template>
-  <div class="of-container customiser-container" :class="horizontal">
+  <div class="customiser-container" :class="horizontal">
     <div
       class="customiser-half ch-right"
       :style="[
@@ -10,7 +10,8 @@
       ]"
     >
       <div class="customiser-details">
-        <img src="@/assets/EntrySignBlackcopy.png" />
+        <img :src="logoUpload" />
+        <!-- <img src="@/assets/EntrySignBlackcopy.png" /> -->
         <div>
           <h1>Welcome</h1>
           <h2>Please Select an Option</h2>
@@ -42,7 +43,7 @@ export default {
     return {};
   },
   computed: {
-    ...mapState(["themeColour", "themeStyle"]),
+    ...mapState(["themeColour", "themeStyle", "logoUpload"]),
     horizontal() {
       return {
         horizontal: this.$store.state.layout == "Horizontal",
@@ -60,6 +61,7 @@ export default {
 <style scoped>
 /* Vertical (DEFAULT) Styles */
 .customiser-container {
+  width: 100%;
   display: flex;
   flex-direction: row;
 }
@@ -111,6 +113,7 @@ export default {
 }
 .horizontal .customiser-half.ch-right {
   border-bottom-width: 4px;
+  min-height: 300px;
 }
 .horizontal .customiser-details {
   flex-direction: row;
