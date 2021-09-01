@@ -20,6 +20,38 @@
         @click="updateHardwareType"
       />
     </div>
+    <div class="of-flex of-flex-row of-flex-center">
+      <div class="of-p-7">
+        <ListItem
+          icon="Contactless.png"
+          text="Contacless ID Card/Fob Bolt On"
+        />
+        <ListItem icon="aio-touchscreen.png" text="All-In-One Touchscreen" />
+        <ListItem icon="idCard.png" text="1 ID Card Artwork Design" />
+        <ListItem icon="Software.png" text="Entrysign Software" />
+        <ListItem icon="Thermal.png" text="Thermal Label Printer" />
+      </div>
+      <div class="of-p-7">
+        <ListItem
+          icon="iconMainScreen3.png"
+          text="Back Office Suite Software"
+        />
+
+        <ListItem
+          icon="iconMainScreen2.png"
+          text="Remote Configuration And Training"
+        />
+        <ListItem
+          icon="entrysign.png"
+          text="12 Months Entrysign Live Subscription"
+        />
+        <ListItem
+          icon="iconMainScreen2.png"
+          text="1 Main Screen Artwork Design"
+        />
+        <ListItem icon="1year.png" text="1 Year Solution Support" />
+      </div>
+    </div>
   </div>
 </template>
 
@@ -28,6 +60,7 @@
 import Header from "@/components/Header.vue";
 import navBar from "@/components/navBar.vue";
 import ImgRadio from "@/components/ImgRadio.vue";
+import ListItem from "@/components/ListItem.vue";
 
 export default {
   name: "Hardware",
@@ -35,6 +68,7 @@ export default {
     Header,
     navBar,
     ImgRadio,
+    ListItem,
   },
   data() {
     return {

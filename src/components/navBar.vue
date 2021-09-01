@@ -11,6 +11,8 @@
     <router-link :to="{ name: 'Access Door Control' }"
       >Access Door Control</router-link
     ><span>></span>
+    <router-link :to="{ name: 'Software' }">Software</router-link
+    ><span>></span>
     <router-link :to="{ name: 'Infection Control Package' }"
       >Infection Control Package</router-link
     ><span>></span>

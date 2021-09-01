@@ -5,6 +5,7 @@ import Hardware from "../views/Hardware.vue";
 import Customise from "../views/Customise.vue";
 import AdditionalEntryPoints from "../views/AdditionalEntryPoints.vue";
 import AccessDoorControl from "../views/AccesDoorControl.vue";
+import Software from "../views/Software.vue";
 import InfectionControlPackage from "../views/InfectionControlPackage.vue";
 import ProductAddons from "../views/ProductAddons.vue";
 import Summary from "../views/Summary.vue";
@@ -39,6 +40,11 @@ const routes = [
     path: "/access-door-control",
     name: "Access Door Control",
     component: AccessDoorControl,
+  },
+  {
+    path: "/Software",
+    name: "Software",
+    component: Software,
   },
   {
     path: "/infection-control-package",

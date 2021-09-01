@@ -6,6 +6,7 @@
       :options="adcoptions"
       v-model="info.doorAccess"
       label="Select Something"
+      @input="updateAccessDoorControl"
     />
   </div>
 </template>
@@ -30,6 +31,11 @@ export default {
         doorAcces: "",
       },
     };
+  },
+  methods: {
+    updateAccessDoorControl(e) {
+      this.$store.commit("updateAccessDoorControl", e.target.value);
+    },
   },
 };
 </script>

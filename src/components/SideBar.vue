@@ -45,6 +45,22 @@
         Logo: {{ $store.getters.logoUpload }}
         <br />
         Theme Colour: {{ $store.getters.themeColour }}
+        <br />
+        <strong>Additional Entry Points</strong>
+        <br />
+        RFID: {{ $store.getters.additionalRFID }}
+        <br />
+        Desk: {{ $store.getters.additionalDesk }}
+        <br />
+        Wall: {{ $store.getters.additionalWall }}
+        <br />
+        <strong>Access Door Control</strong>
+        <br />
+        ADC: {{ $store.getters.accessDoorControl }}
+        <br />
+        <strong>Software</strong>
+        <br />
+        ADC: {{ $store.getters.misSystem }}
       </div>
     </div>
   </div>

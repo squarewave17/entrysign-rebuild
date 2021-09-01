@@ -20,15 +20,26 @@
           label="RFID Terminal"
           v-model="additionalRFID"
           type="number"
+          @input="updateAdditionalRFID"
         />
       </div>
       <div class="of-flex of-flex-column">
         <img class="of-p-8" src="@/assets/deskmount.png" />
-        <BaseInput label="Desk Mount" v-model="additionalDM" type="number" />
+        <BaseInput
+          label="Desk Mount"
+          v-model="additionalDM"
+          type="number"
+          @input="updateAdditionalDesk"
+        />
       </div>
       <div class="of-flex of-flex-column">
         <img class="of-p-8" src="@/assets/wallmount.png" />
-        <BaseInput label="Wall Mount" v-model="additionalWM" type="number" />
+        <BaseInput
+          label="Wall Mount"
+          v-model="additionalWM"
+          type="number"
+          @input="updateAdditionalWall"
+        />
       </div>
     </div>
   </div>
@@ -41,7 +52,7 @@ import navBar from "@/components/navBar.vue";
 import BaseInput from "@/components/BaseInput.vue";
 
 export default {
-  name: "Home",
+  name: "Additional Entry Points",
   components: {
     Header,
     navBar,
@@ -55,6 +66,17 @@ export default {
         additionalWM: "",
       },
     };
+  },
+  methods: {
+    updateAdditionalRFID(e) {
+      this.$store.commit("updateAdditionalRFID", e.target.value);
+    },
+    updateAdditionalDesk(e) {
+      this.$store.commit("updateAdditionalDesk", e.target.value);
+    },
+    updateAdditionalWall(e) {
+      this.$store.commit("updateAdditionalWall", e.target.value);
+    },
   },
 };
 </script>

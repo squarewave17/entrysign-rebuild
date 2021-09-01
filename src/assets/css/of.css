@@ -1738,17 +1738,9 @@
   margin-right: var(--of-space-f16);
 }
 
-/* ========================================================================
-   Component: Base
- ========================================================================== */
-/*
- * 1. Set `font-size` to support `rem` units
- *    Not using `font` property because a leading hyphen (e.g. -apple-system) causes the font to break in IE11 and Edge
- * 2. Prevent adjustments of font size after orientation changes in iOS.
- * 3. Style
- */
-
 html {
+  /* 1 */
+  /* font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, "Helvetica Neue", Arial, "Noto Sans", sans-serif, "Apple Color Emoji", "Segoe UI Emoji", "Segoe UI Symbol", "Noto Color Emoji"; */
   font-size: var(--of-font-size-f10);
   font-weight: normal;
   line-height: 1.5;
@@ -1763,13 +1755,6 @@ html {
  */
 body {
   margin: 0;
-}
-
-/* Box sizing rules */
-*,
-*::before,
-*::after {
-  box-sizing: border-box;
 }
 /* Links
  ========================================================================== */
@@ -1983,12 +1968,15 @@ h5,
 .of-h5,
 h6,
 .of-h6,
-.of-heading-s,
-.of-heading-m,
-.of-heading-l,
-.of-heading-xl,
-.of-heading-2xl {
+.of-heading-small,
+.of-heading-medium,
+.of-heading-large,
+.of-heading-xlarge,
+.of-heading-2xlarge {
   margin: 0 0 20px 0;
+  /* font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto,
+    "Helvetica Neue", Arial, "Noto Sans", sans-serif, "Apple Color Emoji",
+    "Segoe UI Emoji", "Segoe UI Symbol", "Noto Color Emoji"; */
   font-weight: normal;
   color: #333;
   text-transform: none;
@@ -2006,11 +1994,11 @@ h6,
 * + .of-h5,
 * + h6,
 * + .of-h6,
-* + .of-heading-s,
-* + .of-heading-m,
-* + .of-heading-l,
-* + .of-heading-xl,
-* + .of-heading-2xl {
+* + .of-heading-small,
+* + .of-heading-medium,
+* + .of-heading-large,
+* + .of-heading-xlarge,
+* + .of-heading-2xlarge {
   margin-top: 40px;
 }
 /*
@@ -2046,7 +2034,17 @@ h6,
   font-size: var(--of-font-size-f11);
   line-height: 1.4;
 }
-
+/* Tablet landscape and bigger */
+/* @media (min-width: 960px) {
+  h1,
+  .of-h1 {
+    font-size: 2.625rem;
+  }
+  h2,
+  .of-h2 {
+    font-size: 2rem;
+  }
+} */
 /* Lists
  ========================================================================== */
 ul,
@@ -2144,7 +2142,7 @@ pre {
   background: #fff;
 }
 pre code {
-  /* font-family: Consolas, monaco, monospace; */
+  font-family: Consolas, monaco, monospace;
 }
 /* Selection pseudo-element
  ========================================================================== */
@@ -2188,7 +2186,7 @@ template {
   content: "960px";
 }
 .of-breakpoint-l::before {
-  content: "1400px";
+  content: "1200px";
 }
 .of-breakpoint-xl::before {
   content: "1600px";
@@ -2196,7 +2194,7 @@ template {
 :root {
   --of-breakpoint-s: 640px;
   --of-breakpoint-m: 960px;
-  --of-breakpoint-l: 1400px;
+  --of-breakpoint-l: 1200px;
   --of-breakpoint-xl: 1600px;
 }
 /* ========================================================================
@@ -2261,27 +2259,69 @@ a.of-link-reset,
 /* ========================================================================
    Component: Heading
  ========================================================================== */
-.of-heading-s {
+.of-heading-small {
   font-size: var(--of-font-size-f5);
   line-height: 1.2;
 }
-.of-heading-m {
+.of-heading-medium {
   font-size: var(--of-font-size-f4);
   line-height: 1.1;
 }
-.of-heading-l {
+.of-heading-large {
   font-size: var(--of-font-size-f3);
   line-height: 1.1;
 }
-.of-heading-xl {
+.of-heading-xlarge {
   font-size: var(--of-font-size-f2);
   line-height: 1;
 }
-.of-heading-2xl {
+.of-heading-2xlarge {
   font-size: var(--of-font-size-f1);
   line-height: 1;
 }
-
+/* Tablet Landscape and bigger */
+/* @media (min-width: 960px) {
+  .of-heading-small {
+    font-size: 3.25rem;
+  }
+  .of-heading-medium {
+    font-size: 3.5rem;
+  }
+  .of-heading-large {
+    font-size: 4rem;
+  }
+  .of-heading-xlarge {
+    font-size: 6rem;
+  }
+  .of-heading-2xlarge {
+    font-size: 8rem;
+  }
+} */
+/* Laptop and bigger */
+/* @media (min-width: 1200px) {
+  .of-heading-medium {
+    font-size: 4rem;
+  }
+  .of-heading-large {
+    font-size: 6rem;
+  }
+  .of-heading-xlarge {
+    font-size: 8rem;
+  }
+  .of-heading-2xlarge {
+    font-size: 11rem;
+  }
+} */
+/* Primary
+   Deprecated: Use `of-heading-medium` instead
+ ========================================================================== */
+/* Tablet landscape and bigger */
+/* Desktop and bigger */
+/* Hero
+   Deprecated: Use `of-heading-xlarge` instead
+ ========================================================================== */
+/* Tablet landscape and bigger */
+/* Desktop and bigger */
 /* Divider
  ========================================================================== */
 .of-heading-divider {
@@ -2311,7 +2351,45 @@ a.of-link-reset,
   margin-right: calc(5px + 0.2em);
   border-left: calc(5px + 0.1em) solid #e5e5e5;
 }
-
+/* Line
+ ========================================================================== */
+/*
+ * Clip the child element
+ */
+.of-heading-line {
+  overflow: hidden;
+}
+/*
+ * Extra markup is needed to make it work with text align
+ */
+.of-heading-line > * {
+  display: inline-block;
+  position: relative;
+}
+/*
+ * 1. Center vertically
+ * 2. Make the element as large as possible. It's clipped by the container.
+ * 3. Style
+ */
+.of-heading-line > ::before,
+.of-heading-line > ::after {
+  content: "";
+  /* 1 */
+  position: absolute;
+  top: calc(50% - ((0.2px + 0.05em) / 2));
+  /* 2 */
+  width: 2000px;
+  /* 3 */
+  border-bottom: calc(0.2px + 0.05em) solid #e5e5e5;
+}
+.of-heading-line > ::before {
+  right: 100%;
+  margin-right: calc(5px + 0.3em);
+}
+.of-heading-line > ::after {
+  left: 100%;
+  margin-left: calc(5px + 0.3em);
+}
 /* ========================================================================
    Component: Divider
  ========================================================================== */
@@ -2994,7 +3072,7 @@ button.of-icon:not(:disabled) {
 }
 .of-range:focus::-webkit-slider-runnable-track,
 .of-range:active::-webkit-slider-runnable-track {
-  background: #d2d2d2;
+  background: #dedede;
 }
 /* Firefox */
 .of-range::-moz-range-track {
@@ -3003,7 +3081,7 @@ button.of-icon:not(:disabled) {
   border-radius: 500px;
 }
 .of-range:focus::-moz-range-track {
-  background: #d2d2d2;
+  background: #dedede;
 }
 /* Edge */
 .of-range::-ms-fill-lower,
@@ -3014,7 +3092,7 @@ button.of-icon:not(:disabled) {
 }
 .of-range:focus::-ms-fill-lower,
 .of-range:focus::-ms-fill-upper {
-  background: #d2d2d2;
+  background: #dedede;
 }
 /* ========================================================================
    Component: Form
@@ -3167,8 +3245,8 @@ button.of-icon:not(:disabled) {
 .of-select[multiple],
 .of-select[size],
 .of-textarea {
-  padding-top: 4px;
-  padding-bottom: 4px;
+  padding-top: 6px;
+  padding-bottom: 6px;
   vertical-align: top;
 }
 .of-select[multiple],
@@ -3215,10 +3293,17 @@ button.of-icon:not(:disabled) {
 .of-form-small {
   font-size: var(--of-font-size-f11);
 }
+/* Single-line */
 .of-form-small:not(textarea):not([multiple]):not([size]) {
   height: 30px;
   padding-left: 8px;
   padding-right: 8px;
+}
+/* Multi-line */
+textarea.of-form-small,
+[multiple].of-form-small,
+[size].of-form-small {
+  padding: 5px 8px;
 }
 .of-form-small:not(select):not(input):not(textarea) {
   line-height: 28px;
@@ -3229,10 +3314,17 @@ button.of-icon:not(:disabled) {
 .of-form-large {
   font-size: var(--of-font-size-f9);
 }
+/* Single-line */
 .of-form-large:not(textarea):not([multiple]):not([size]) {
   height: 55px;
   padding-left: 12px;
   padding-right: 12px;
+}
+/* Multi-line */
+textarea.of-form-large,
+[multiple].of-form-large,
+[size].of-form-large {
+  padding: 7px 12px;
 }
 .of-form-large:not(select):not(input):not(textarea) {
   line-height: 53px;
@@ -3335,7 +3427,7 @@ select.of-form-width-xsmall {
 }
 /* 1 */
 .of-input[list]::-webkit-calendar-picker-indicator {
-  display: none;
+  display: none !important;
 }
 /* Radio and checkbox
  * Note: Does not work in IE11
@@ -3377,6 +3469,7 @@ select.of-form-width-xsmall {
 /* Focus */
 .of-radio:focus,
 .of-checkbox:focus {
+  background-color: rgba(0, 0, 0, 0);
   outline: none;
   border-color: #1e87f0;
 }
@@ -3811,13 +3904,13 @@ select.of-form-width-xsmall {
   line-height: 1.5;
   background: none;
   /* 2 */
-  color: #1e87f0;
+  color: #333;
 }
 /* Hover + Focus */
 .of-button-link:hover,
 .of-button-link:focus {
-  color: #0f6ecd;
-  text-decoration: underline;
+  color: #999;
+  text-decoration: none;
 }
 /* Disabled */
 .of-button-link:disabled {
@@ -4044,7 +4137,7 @@ select.of-form-width-xsmall {
   display: flow-root;
   /* 1 */
   box-sizing: content-box;
-  max-width: 1400px;
+  max-width: 1200px;
   margin-left: auto;
   margin-right: auto;
   padding-left: 15px;
@@ -4083,7 +4176,7 @@ select.of-form-width-xsmall {
   max-width: 750px;
 }
 .of-container-small {
-  max-width: 1200px;
+  max-width: 900px;
 }
 .of-container-large {
   max-width: 1400px;
@@ -4354,9 +4447,8 @@ select.of-form-width-xsmall {
   right: 15px;
   z-index: 1;
   /* 2 */
-  height: 30px;
-  padding-left: 10px;
-  padding-right: 10px;
+  height: 22px;
+  padding: 0 10px;
   /* 3 */
   background: #1e87f0;
   color: #fff;
@@ -4365,6 +4457,9 @@ select.of-form-width-xsmall {
   display: flex;
   justify-content: center;
   align-items: center;
+  line-height: 0;
+  border-radius: 2px;
+  text-transform: uppercase;
 }
 /*
  * Remove margin from adjacent element
@@ -4375,7 +4470,7 @@ select.of-form-width-xsmall {
 /* Hover modifier
  ========================================================================== */
 .of-card-hover:not(.of-card-default):not(.of-card-primary):not(.of-card-secondary):hover {
-  background: #fff;
+  background-color: #fff;
   box-shadow: 0 14px 25px rgba(0, 0, 0, 0.16);
 }
 /* Style modifiers
@@ -4385,7 +4480,7 @@ select.of-form-width-xsmall {
  * Note: Header and Footer are only implemented for the default style
  */
 .of-card-default {
-  background: #fff;
+  background-color: #fff;
   color: #666;
   box-shadow: 0 5px 15px rgba(0, 0, 0, 0.08);
 }
@@ -4406,7 +4501,7 @@ select.of-form-width-xsmall {
  * Primary
  */
 .of-card-primary {
-  background: #1e87f0;
+  background-color: #1e87f0;
   color: #fff;
   box-shadow: 0 5px 15px rgba(0, 0, 0, 0.08);
 }
@@ -4421,7 +4516,7 @@ select.of-form-width-xsmall {
  * Secondary
  */
 .of-card-secondary {
-  background: #222;
+  background-color: #222;
   color: #fff;
   box-shadow: 0 5px 15px rgba(0, 0, 0, 0.08);
 }
@@ -4764,26 +4859,26 @@ select.of-form-width-xsmall {
  */
 .of-badge {
   box-sizing: border-box;
-  min-width: 22px;
-  height: 22px;
+  min-width: 18px;
+  height: 18px;
   padding: 0 5px;
   border-radius: 500px;
   vertical-align: middle;
   /* 1 */
   background: #1e87f0;
-  color: #fff;
+  color: #fff !important;
   font-size: var(--of-font-size-f11);
   /* 2 */
   display: inline-flex;
   justify-content: center;
   align-items: center;
+  line-height: 0;
 }
 /*
  * Required for `a`
  */
 .of-badge:hover,
 .of-badge:focus {
-  color: #fff;
   text-decoration: none;
   outline: none;
 }
@@ -4877,11 +4972,11 @@ select.of-form-width-xsmall {
   line-height: 1.2;
 }
 /* Tablet landscape and bigger */
-@media (min-width: 960px) {
+/* @media (min-width: 960px) {
   .of-article-title {
     font-size: 2.625rem;
   }
-}
+} */
 /* Meta
  ========================================================================== */
 .of-article-meta {
@@ -5092,21 +5187,22 @@ select.of-form-width-xsmall {
 /* Default modifier
  ========================================================================== */
 .of-search-default {
-  width: 180px;
+  width: 240px;
 }
 /*
  * Input
  */
 .of-search-default .of-search-input {
   height: 40px;
-  padding-left: 6px;
-  padding-right: 6px;
+  padding-left: 10px;
+  padding-right: 10px;
   background: transparent;
   border: 1px solid #e5e5e5;
 }
 /* Focus */
 .of-search-default .of-search-input:focus {
-  background-color: transparent;
+  background-color: rgba(0, 0, 0, 0);
+  border-color: #1e87f0;
 }
 /*
  * Icon
@@ -5158,7 +5254,7 @@ select.of-form-width-xsmall {
 .of-search-large .of-search-input {
   height: 80px;
   background: transparent;
-  font-size: 2.625rem;
+  font-size: var(--of-font-size-f6);
 }
 /*
  * Icon
@@ -5515,7 +5611,7 @@ select.of-form-width-xsmall {
 /* Title
  ========================================================================== */
 .of-modal-title {
-  font-size: 2rem;
+  font-size: var(--of-font-size-f7);
   line-height: 1.3;
 }
 /* Close
@@ -6209,7 +6305,7 @@ select.of-form-width-xsmall {
   /* 1 */
   font-variant-numeric: tabular-nums;
   /* 2 */
-  font-size: 2rem;
+  font-size: var(--of-font-size-f7);
   line-height: 0.8;
 }
 /* Phone landscape and bigger */
@@ -6227,21 +6323,21 @@ select.of-form-width-xsmall {
 /* Separator
  ========================================================================== */
 .of-countdown-separator {
-  font-size: 1rem;
+  font-size: var(--of-font-size-f10);
   line-height: 1.6;
 }
 /* Phone landscape and bigger */
-@media (min-width: 640px) {
+/* @media (min-width: 640px) {
   .of-countdown-separator {
-    font-size: 2rem;
+    font-size: var(--of-font-size-f7);
   }
-}
+} */
 /* Tablet landscape and bigger */
-@media (min-width: 960px) {
+/* @media (min-width: 960px) {
   .of-countdown-separator {
     font-size: 3rem;
   }
-}
+} */
 /* Label
  ========================================================================== */
 /* ========================================================================
@@ -6621,23 +6717,35 @@ select.of-form-width-xsmall {
  ========================================================================== */
 /*
  * Reset
- * 1. Prepare lists
- * 2. Prepare links
- * 3. Remove default focus style
  */
-/* 1 */
 .of-nav,
 .of-nav ul {
   margin: 0;
   padding: 0;
   list-style: none;
 }
-/* 2 */
+/*
+* 1. Center content vertically, e.g. an icon
+* 2. Imitate white space gap when using flexbox
+* 3. Reset link
+* 4. Space is allocated solely based on content dimensions: 0 0 auto
+ */
 .of-nav li > a {
-  display: block;
+  /* 1 */
+  display: flex;
+  align-items: center;
+  /* 2 */
+  column-gap: 0.25em;
+  /* 3*/
   text-decoration: none;
 }
-/* 3 */
+/* 4 */
+.of-nav li > a > * {
+  flex: none;
+}
+/*
+ * Remove default focus style
+ */
 .of-nav li > a:focus {
   outline: none;
 }
@@ -6675,7 +6783,7 @@ ul.of-nav-sub {
   content: "";
   width: 1.5em;
   height: 1.5em;
-  float: right;
+  margin-left: auto;
   background-image: url("data:image/svg+xml;charset=UTF-8,%3Csvg%20width%3D%2214%22%20height%3D%2214%22%20viewBox%3D%220%200%2014%2014%22%20xmlns%3D%22http%3A%2F%2Fwww.w3.org%2F2000%2Fsvg%22%3E%0A%20%20%20%20%3Cpolyline%20fill%3D%22none%22%20stroke%3D%22%23666%22%20stroke-width%3D%221.1%22%20points%3D%2210%201%204%207%2010%2013%22%20%2F%3E%0A%3C%2Fsvg%3E");
   background-repeat: no-repeat;
   background-position: 50% 50%;
@@ -6789,8 +6897,17 @@ ul.of-nav-sub {
 }
 /* Alignment modifier
  ========================================================================== */
+/*
+ * 1. Center header
+ * 2. Center items
+ */
+/* 1 */
 .of-nav-center {
   text-align: center;
+}
+/* 2 */
+.of-nav-center li > a {
+  justify-content: center;
 }
 /* Sublists */
 .of-nav-center .of-nav-sub,
@@ -6799,7 +6916,7 @@ ul.of-nav-sub {
 }
 /* Parent icon modifier  */
 .of-nav-center.of-nav-parent-icon > .of-parent > a::after {
-  position: absolute;
+  margin-left: 0;
 }
 /* Style modifier
  ========================================================================== */
@@ -6916,9 +7033,10 @@ ul.of-nav-sub {
 /*
  * Items
  * 1. Center content vertically and horizontally
- * 2. Dimensions
- * 3. Style
- * 4. Required for `a`
+ * 2. Imitate white space gap when using flexbox
+ * 3. Dimensions
+ * 4. Style
+ * 5. Required for `a`
  */
 .of-navbar-nav > li > a,
 .of-navbar-item,
@@ -6928,13 +7046,17 @@ ul.of-nav-sub {
   justify-content: center;
   align-items: center;
   /* 2 */
+  column-gap: 0.25em;
+  /* 3 */
   box-sizing: border-box;
   min-height: 80px;
   padding: 0 15px;
-  /* 3 */
-  font-size: var(--of-font-size-f11);
-
   /* 4 */
+  font-size: var(--of-font-size-f11);
+  /* font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto,
+    "Helvetica Neue", Arial, "Noto Sans", sans-serif, "Apple Color Emoji",
+    "Segoe UI Emoji", "Segoe UI Symbol", "Noto Color Emoji"; */
+  /* 5 */
   text-decoration: none;
 }
 /*
@@ -6968,6 +7090,12 @@ ul.of-nav-sub {
  ========================================================================== */
 .of-navbar-item {
   color: #666;
+}
+/*
+ * Remove margin from the last-child
+ */
+.of-navbar-item > :last-child {
+  margin-bottom: 0;
 }
 /* Toggle
  ========================================================================== */
@@ -7178,16 +7306,19 @@ ul.of-nav-sub {
  ========================================================================== */
 /*
  * 1. Allow items to wrap into the next line
- * 2. Gutter
- * 3. Reset list
+ * 2. Center items vertically if they have a different height
+ * 3. Gutter
+ * 4. Reset list
  */
 .of-subnav {
   display: flex;
   /* 1 */
   flex-wrap: wrap;
   /* 2 */
-  margin-left: -20px;
+  align-items: center;
   /* 3 */
+  margin-left: -20px;
+  /* 4 */
   padding: 0;
   list-style: none;
 }
@@ -7209,13 +7340,17 @@ ul.of-nav-sub {
 /*
  * Items must target `a` elements to exclude other elements (e.g. dropdowns)
  * Using `:first-child` instead of `a` to support `span` elements for text
- * 1. Prevent gap if child element is `inline-block`, e.g. an icon
- * 2. Style
+ * 1. Center content vertically, e.g. an icon
+ * 2. Imitate white space gap when using flexbox
+ * 3. Style
  */
 .of-subnav > * > :first-child {
   /* 1 */
-  display: block;
+  display: flex;
+  align-items: center;
   /* 2 */
+  column-gap: 0.25em;
+  /* 3 */
   color: #999;
   font-size: var(--of-font-size-f11);
   text-transform: uppercase;
@@ -7444,14 +7579,20 @@ ul.of-nav-sub {
  ========================================================================== */
 /*
  * Items must target `a` elements to exclude other elements (e.g. dropdowns)
- * 1. Center text if a width is set
- * 2. Style
+ * 1. Center content vertically, e.g. an icon
+ * 2. Imitate white space gap when using flexbox
+ * 3. Center content if a width is set
+ * 4. Style
  */
 .of-tab > * > a {
   /* 1 */
-  display: block;
-  text-align: center;
+  display: flex;
+  align-items: center;
   /* 2 */
+  column-gap: 0.25em;
+  /* 3 */
+  justify-content: center;
+  /* 4 */
   padding: 5px 10px;
   color: #999;
   border-bottom: 1px solid transparent;
@@ -7519,12 +7660,12 @@ ul.of-nav-sub {
   border-bottom: none;
 }
 .of-tab-left > * > a {
-  text-align: left;
+  justify-content: left;
   border-right: 1px solid transparent;
   border-bottom: none;
 }
 .of-tab-right > * > a {
-  text-align: left;
+  justify-content: left;
   border-left: 1px solid transparent;
   border-bottom: none;
 }
@@ -7763,14 +7904,27 @@ ul.of-nav-sub {
  ========================================================================== */
 /*
  * Items must target `a` elements to exclude other elements (e.g. dropdowns)
- * 1. Prevent gap if child element is `inline-block`, e.g. an icon
- * 2. Style
+ * 1. Center content vertically if there is still some text
+ * 2. Imitate white space gap when using flexbox
+ * 3. Force text not to affect item height
+ * 4. Style
+ * 5. Required for `a` if there is still some text
  */
 .of-iconnav > * > a {
   /* 1 */
-  display: block;
+  display: flex;
+  align-items: center;
   /* 2 */
+  column-gap: 0.25em;
+  /* 3 */
+  line-height: 0;
+  /* 4 */
   color: #999;
+  /* 5 */
+  text-decoration: none;
+  font-size: var(--of-font-size-f11);
+  transition: 0.1s ease-in-out;
+  transition-property: color, background-color;
 }
 /* Hover + Focus */
 .of-iconnav > * > a:hover,
@@ -8911,19 +9065,19 @@ ul.of-nav-sub {
 }
 /* Weight modifier
  ========================================================================== */
-.of-text-weight-light {
+.of-text-light {
   font-weight: 300;
 }
-.of-text-weight-normal {
+.of-text-normal {
   font-weight: 400;
 }
-.of-text-weight-bold {
+.of-text-bold {
   font-weight: 700;
 }
-.of-text-weight-lighter {
+.of-text-lighter {
   font-weight: lighter;
 }
-.of-text-weight-bolder {
+.of-text-bolder {
   font-weight: bolder;
 }
 /* Style modifier
@@ -8942,37 +9096,33 @@ ul.of-nav-sub {
 .of-text-lowercase {
   text-transform: lowercase !important;
 }
+/* Decoration modifier
+ ========================================================================== */
+.of-text-decoration-none {
+  text-decoration: none !important;
+}
 /* Color modifiers
  ========================================================================== */
 .of-text-muted {
-  color: #999;
+  color: #999 !important;
 }
 .of-text-emphasis {
-  color: #333;
-}
-.of-text-light {
-  color: var(--of-light);
-}
-.of-text-light-ac {
-  color: var(--of-light-ac);
+  color: #333 !important;
 }
 .of-text-primary {
-  color: var(--of-primary);
+  color: #1e87f0 !important;
 }
-.of-text-dark-ac {
-  color: var(--of-dark-ac);
-}
-.of-text-dark {
-  color: var(--of-dark);
+.of-text-secondary {
+  color: #222 !important;
 }
 .of-text-success {
-  color: #32d296;
+  color: #32d296 !important;
 }
 .of-text-warning {
-  color: #faa05a;
+  color: #faa05a !important;
 }
 .of-text-danger {
-  color: #f0506e;
+  color: #f0506e !important;
 }
 /* Background modifier
  ========================================================================== */
@@ -9845,6 +9995,9 @@ iframe.of-cover {
  */
 .of-logo {
   font-size: var(--of-font-size-f8);
+  /* font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto,
+    "Helvetica Neue", Arial, "Noto Sans", sans-serif, "Apple Color Emoji",
+    "Segoe UI Emoji", "Segoe UI Symbol", "Noto Color Emoji"; */
   color: #666;
   /* 1 */
   text-decoration: none;
@@ -11174,11 +11327,11 @@ iframe.of-cover {
 .of-light .of-h5,
 .of-light h6,
 .of-light .of-h6,
-.of-light .of-heading-s,
-.of-light .of-heading-m,
-.of-light .of-heading-l,
-.of-light .of-heading-xl,
-.of-light .of-heading-2xl,
+.of-light .of-heading-small,
+.of-light .of-heading-medium,
+.of-light .of-heading-large,
+.of-light .of-heading-xlarge,
+.of-light .of-heading-2xlarge,
 .of-section-primary:not(.of-preserve-color) h1,
 .of-section-primary:not(.of-preserve-color) .of-h1,
 .of-section-primary:not(.of-preserve-color) h2,
@@ -11191,11 +11344,11 @@ iframe.of-cover {
 .of-section-primary:not(.of-preserve-color) .of-h5,
 .of-section-primary:not(.of-preserve-color) h6,
 .of-section-primary:not(.of-preserve-color) .of-h6,
-.of-section-primary:not(.of-preserve-color) .of-heading-s,
-.of-section-primary:not(.of-preserve-color) .of-heading-m,
-.of-section-primary:not(.of-preserve-color) .of-heading-l,
-.of-section-primary:not(.of-preserve-color) .of-heading-xl,
-.of-section-primary:not(.of-preserve-color) .of-heading-2xl,
+.of-section-primary:not(.of-preserve-color) .of-heading-small,
+.of-section-primary:not(.of-preserve-color) .of-heading-medium,
+.of-section-primary:not(.of-preserve-color) .of-heading-large,
+.of-section-primary:not(.of-preserve-color) .of-heading-xlarge,
+.of-section-primary:not(.of-preserve-color) .of-heading-2xlarge,
 .of-section-secondary:not(.of-preserve-color) h1,
 .of-section-secondary:not(.of-preserve-color) .of-h1,
 .of-section-secondary:not(.of-preserve-color) h2,
@@ -11208,11 +11361,11 @@ iframe.of-cover {
 .of-section-secondary:not(.of-preserve-color) .of-h5,
 .of-section-secondary:not(.of-preserve-color) h6,
 .of-section-secondary:not(.of-preserve-color) .of-h6,
-.of-section-secondary:not(.of-preserve-color) .of-heading-s,
-.of-section-secondary:not(.of-preserve-color) .of-heading-m,
-.of-section-secondary:not(.of-preserve-color) .of-heading-l,
-.of-section-secondary:not(.of-preserve-color) .of-heading-xl,
-.of-section-secondary:not(.of-preserve-color) .of-heading-2xl,
+.of-section-secondary:not(.of-preserve-color) .of-heading-small,
+.of-section-secondary:not(.of-preserve-color) .of-heading-medium,
+.of-section-secondary:not(.of-preserve-color) .of-heading-large,
+.of-section-secondary:not(.of-preserve-color) .of-heading-xlarge,
+.of-section-secondary:not(.of-preserve-color) .of-heading-2xlarge,
 .of-tile-primary:not(.of-preserve-color) h1,
 .of-tile-primary:not(.of-preserve-color) .of-h1,
 .of-tile-primary:not(.of-preserve-color) h2,
@@ -11225,11 +11378,11 @@ iframe.of-cover {
 .of-tile-primary:not(.of-preserve-color) .of-h5,
 .of-tile-primary:not(.of-preserve-color) h6,
 .of-tile-primary:not(.of-preserve-color) .of-h6,
-.of-tile-primary:not(.of-preserve-color) .of-heading-s,
-.of-tile-primary:not(.of-preserve-color) .of-heading-m,
-.of-tile-primary:not(.of-preserve-color) .of-heading-l,
-.of-tile-primary:not(.of-preserve-color) .of-heading-xl,
-.of-tile-primary:not(.of-preserve-color) .of-heading-2xl,
+.of-tile-primary:not(.of-preserve-color) .of-heading-small,
+.of-tile-primary:not(.of-preserve-color) .of-heading-medium,
+.of-tile-primary:not(.of-preserve-color) .of-heading-large,
+.of-tile-primary:not(.of-preserve-color) .of-heading-xlarge,
+.of-tile-primary:not(.of-preserve-color) .of-heading-2xlarge,
 .of-tile-secondary:not(.of-preserve-color) h1,
 .of-tile-secondary:not(.of-preserve-color) .of-h1,
 .of-tile-secondary:not(.of-preserve-color) h2,
@@ -11242,11 +11395,11 @@ iframe.of-cover {
 .of-tile-secondary:not(.of-preserve-color) .of-h5,
 .of-tile-secondary:not(.of-preserve-color) h6,
 .of-tile-secondary:not(.of-preserve-color) .of-h6,
-.of-tile-secondary:not(.of-preserve-color) .of-heading-s,
-.of-tile-secondary:not(.of-preserve-color) .of-heading-m,
-.of-tile-secondary:not(.of-preserve-color) .of-heading-l,
-.of-tile-secondary:not(.of-preserve-color) .of-heading-xl,
-.of-tile-secondary:not(.of-preserve-color) .of-heading-2xl,
+.of-tile-secondary:not(.of-preserve-color) .of-heading-small,
+.of-tile-secondary:not(.of-preserve-color) .of-heading-medium,
+.of-tile-secondary:not(.of-preserve-color) .of-heading-large,
+.of-tile-secondary:not(.of-preserve-color) .of-heading-xlarge,
+.of-tile-secondary:not(.of-preserve-color) .of-heading-2xlarge,
 .of-card-primary.of-card-body h1,
 .of-card-primary.of-card-body .of-h1,
 .of-card-primary.of-card-body h2,
@@ -11259,11 +11412,11 @@ iframe.of-cover {
 .of-card-primary.of-card-body .of-h5,
 .of-card-primary.of-card-body h6,
 .of-card-primary.of-card-body .of-h6,
-.of-card-primary.of-card-body .of-heading-s,
-.of-card-primary.of-card-body .of-heading-m,
-.of-card-primary.of-card-body .of-heading-l,
-.of-card-primary.of-card-body .of-heading-xl,
-.of-card-primary.of-card-body .of-heading-2xl,
+.of-card-primary.of-card-body .of-heading-small,
+.of-card-primary.of-card-body .of-heading-medium,
+.of-card-primary.of-card-body .of-heading-large,
+.of-card-primary.of-card-body .of-heading-xlarge,
+.of-card-primary.of-card-body .of-heading-2xlarge,
 .of-card-primary > :not([class*="of-card-media"]) h1,
 .of-card-primary > :not([class*="of-card-media"]) .of-h1,
 .of-card-primary > :not([class*="of-card-media"]) h2,
@@ -11276,11 +11429,11 @@ iframe.of-cover {
 .of-card-primary > :not([class*="of-card-media"]) .of-h5,
 .of-card-primary > :not([class*="of-card-media"]) h6,
 .of-card-primary > :not([class*="of-card-media"]) .of-h6,
-.of-card-primary > :not([class*="of-card-media"]) .of-heading-s,
-.of-card-primary > :not([class*="of-card-media"]) .of-heading-m,
-.of-card-primary > :not([class*="of-card-media"]) .of-heading-l,
-.of-card-primary > :not([class*="of-card-media"]) .of-heading-xl,
-.of-card-primary > :not([class*="of-card-media"]) .of-heading-2xl,
+.of-card-primary > :not([class*="of-card-media"]) .of-heading-small,
+.of-card-primary > :not([class*="of-card-media"]) .of-heading-medium,
+.of-card-primary > :not([class*="of-card-media"]) .of-heading-large,
+.of-card-primary > :not([class*="of-card-media"]) .of-heading-xlarge,
+.of-card-primary > :not([class*="of-card-media"]) .of-heading-2xlarge,
 .of-card-secondary.of-card-body h1,
 .of-card-secondary.of-card-body .of-h1,
 .of-card-secondary.of-card-body h2,
@@ -11293,11 +11446,11 @@ iframe.of-cover {
 .of-card-secondary.of-card-body .of-h5,
 .of-card-secondary.of-card-body h6,
 .of-card-secondary.of-card-body .of-h6,
-.of-card-secondary.of-card-body .of-heading-s,
-.of-card-secondary.of-card-body .of-heading-m,
-.of-card-secondary.of-card-body .of-heading-l,
-.of-card-secondary.of-card-body .of-heading-xl,
-.of-card-secondary.of-card-body .of-heading-2xl,
+.of-card-secondary.of-card-body .of-heading-small,
+.of-card-secondary.of-card-body .of-heading-medium,
+.of-card-secondary.of-card-body .of-heading-large,
+.of-card-secondary.of-card-body .of-heading-xlarge,
+.of-card-secondary.of-card-body .of-heading-2xlarge,
 .of-card-secondary > :not([class*="of-card-media"]) h1,
 .of-card-secondary > :not([class*="of-card-media"]) .of-h1,
 .of-card-secondary > :not([class*="of-card-media"]) h2,
@@ -11310,11 +11463,11 @@ iframe.of-cover {
 .of-card-secondary > :not([class*="of-card-media"]) .of-h5,
 .of-card-secondary > :not([class*="of-card-media"]) h6,
 .of-card-secondary > :not([class*="of-card-media"]) .of-h6,
-.of-card-secondary > :not([class*="of-card-media"]) .of-heading-s,
-.of-card-secondary > :not([class*="of-card-media"]) .of-heading-m,
-.of-card-secondary > :not([class*="of-card-media"]) .of-heading-l,
-.of-card-secondary > :not([class*="of-card-media"]) .of-heading-xl,
-.of-card-secondary > :not([class*="of-card-media"]) .of-heading-2xl,
+.of-card-secondary > :not([class*="of-card-media"]) .of-heading-small,
+.of-card-secondary > :not([class*="of-card-media"]) .of-heading-medium,
+.of-card-secondary > :not([class*="of-card-media"]) .of-heading-large,
+.of-card-secondary > :not([class*="of-card-media"]) .of-heading-xlarge,
+.of-card-secondary > :not([class*="of-card-media"]) .of-heading-2xlarge,
 .of-overlay-primary h1,
 .of-overlay-primary .of-h1,
 .of-overlay-primary h2,
@@ -11327,11 +11480,11 @@ iframe.of-cover {
 .of-overlay-primary .of-h5,
 .of-overlay-primary h6,
 .of-overlay-primary .of-h6,
-.of-overlay-primary .of-heading-s,
-.of-overlay-primary .of-heading-m,
-.of-overlay-primary .of-heading-l,
-.of-overlay-primary .of-heading-xl,
-.of-overlay-primary .of-heading-2xl,
+.of-overlay-primary .of-heading-small,
+.of-overlay-primary .of-heading-medium,
+.of-overlay-primary .of-heading-large,
+.of-overlay-primary .of-heading-xlarge,
+.of-overlay-primary .of-heading-2xlarge,
 .of-offcanvas-bar h1,
 .of-offcanvas-bar .of-h1,
 .of-offcanvas-bar h2,
@@ -11344,11 +11497,11 @@ iframe.of-cover {
 .of-offcanvas-bar .of-h5,
 .of-offcanvas-bar h6,
 .of-offcanvas-bar .of-h6,
-.of-offcanvas-bar .of-heading-s,
-.of-offcanvas-bar .of-heading-m,
-.of-offcanvas-bar .of-heading-l,
-.of-offcanvas-bar .of-heading-xl,
-.of-offcanvas-bar .of-heading-2xl {
+.of-offcanvas-bar .of-heading-small,
+.of-offcanvas-bar .of-heading-medium,
+.of-offcanvas-bar .of-heading-large,
+.of-offcanvas-bar .of-heading-xlarge,
+.of-offcanvas-bar .of-heading-2xlarge {
   color: #fff;
 }
 .of-light blockquote,
@@ -12217,7 +12370,7 @@ iframe.of-cover {
 .of-overlay-primary .of-icon-button:focus,
 .of-offcanvas-bar .of-icon-button:hover,
 .of-offcanvas-bar .of-icon-button:focus {
-  background-color: rgba(242, 242, 242, 0.1);
+  background-color: rgba(255, 255, 255, 0.15);
   color: rgba(255, 255, 255, 0.7);
 }
 .of-light .of-icon-button:active,
@@ -12231,7 +12384,7 @@ iframe.of-cover {
 .of-card-secondary > :not([class*="of-card-media"]) .of-icon-button:active,
 .of-overlay-primary .of-icon-button:active,
 .of-offcanvas-bar .of-icon-button:active {
-  background-color: rgba(230, 230, 230, 0.1);
+  background-color: rgba(255, 255, 255, 0.2);
   color: rgba(255, 255, 255, 0.7);
 }
 .of-light .of-input,
@@ -12305,7 +12458,7 @@ iframe.of-cover {
 .of-offcanvas-bar .of-input:focus,
 .of-offcanvas-bar .of-select:focus,
 .of-offcanvas-bar .of-textarea:focus {
-  background-color: rgba(255, 255, 255, 0.1);
+  background-color: rgba(255, 255, 255, 0.15);
   color: rgba(255, 255, 255, 0.7);
   border-color: rgba(255, 255, 255, 0.7);
 }
@@ -12436,7 +12589,7 @@ iframe.of-cover {
 .of-overlay-primary .of-checkbox,
 .of-offcanvas-bar .of-radio,
 .of-offcanvas-bar .of-checkbox {
-  background-color: rgba(242, 242, 242, 0.1);
+  background-color: rgba(255, 255, 255, 0.1);
   border-color: rgba(255, 255, 255, 0.2);
 }
 .of-light .of-radio:focus,
@@ -12461,6 +12614,7 @@ iframe.of-cover {
 .of-overlay-primary .of-checkbox:focus,
 .of-offcanvas-bar .of-radio:focus,
 .of-offcanvas-bar .of-checkbox:focus {
+  background-color: rgba(255, 255, 255, 0.15);
   border-color: rgba(255, 255, 255, 0.7);
 }
 .of-light .of-radio:checked,
@@ -12536,7 +12690,7 @@ iframe.of-cover {
 .of-offcanvas-bar .of-radio:checked:focus,
 .of-offcanvas-bar .of-checkbox:checked:focus,
 .of-offcanvas-bar .of-checkbox:indeterminate:focus {
-  background-color: #e6e6e6;
+  background-color: #ffffff;
 }
 .of-light .of-radio:checked,
 .of-section-primary:not(.of-preserve-color) .of-radio:checked,
@@ -12893,7 +13047,7 @@ iframe.of-cover {
 .of-card-secondary > :not([class*="of-card-media"]) .of-button-link,
 .of-overlay-primary .of-button-link,
 .of-offcanvas-bar .of-button-link {
-  color: rgba(255, 255, 255, 0.5);
+  color: #fff;
 }
 .of-light .of-button-link:hover,
 .of-light .of-button-link:focus,
@@ -12917,7 +13071,7 @@ iframe.of-cover {
 .of-overlay-primary .of-button-link:focus,
 .of-offcanvas-bar .of-button-link:hover,
 .of-offcanvas-bar .of-button-link:focus {
-  color: rgba(255, 255, 255, 0.7);
+  color: rgba(255, 255, 255, 0.5);
 }
 .of-light.of-card-badge,
 .of-section-primary:not(.of-preserve-color).of-card-badge,
@@ -13070,31 +13224,7 @@ iframe.of-cover {
 .of-overlay-primary .of-badge,
 .of-offcanvas-bar .of-badge {
   background-color: #fff;
-  color: #666;
-}
-.of-light .of-badge:hover,
-.of-light .of-badge:focus,
-.of-section-primary:not(.of-preserve-color) .of-badge:hover,
-.of-section-primary:not(.of-preserve-color) .of-badge:focus,
-.of-section-secondary:not(.of-preserve-color) .of-badge:hover,
-.of-section-secondary:not(.of-preserve-color) .of-badge:focus,
-.of-tile-primary:not(.of-preserve-color) .of-badge:hover,
-.of-tile-primary:not(.of-preserve-color) .of-badge:focus,
-.of-tile-secondary:not(.of-preserve-color) .of-badge:hover,
-.of-tile-secondary:not(.of-preserve-color) .of-badge:focus,
-.of-card-primary.of-card-body .of-badge:hover,
-.of-card-primary.of-card-body .of-badge:focus,
-.of-card-primary > :not([class*="of-card-media"]) .of-badge:hover,
-.of-card-primary > :not([class*="of-card-media"]) .of-badge:focus,
-.of-card-secondary.of-card-body .of-badge:hover,
-.of-card-secondary.of-card-body .of-badge:focus,
-.of-card-secondary > :not([class*="of-card-media"]) .of-badge:hover,
-.of-card-secondary > :not([class*="of-card-media"]) .of-badge:focus,
-.of-overlay-primary .of-badge:hover,
-.of-overlay-primary .of-badge:focus,
-.of-offcanvas-bar .of-badge:hover,
-.of-offcanvas-bar .of-badge:focus {
-  color: #666;
+  color: #666 !important;
 }
 .of-light .of-label,
 .of-section-primary:not(.of-preserve-color) .of-label,
@@ -13250,7 +13380,7 @@ iframe.of-cover {
   .of-search-input:focus,
 .of-overlay-primary .of-search-default .of-search-input:focus,
 .of-offcanvas-bar .of-search-default .of-search-input:focus {
-  background-color: transparent;
+  background-color: rgba(0, 0, 0, 0.05);
 }
 .of-light .of-search-navbar .of-search-input,
 .of-section-primary:not(.of-preserve-color) .of-search-navbar .of-search-input,

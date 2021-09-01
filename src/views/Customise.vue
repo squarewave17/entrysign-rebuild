@@ -121,7 +121,6 @@ export default {
   margin: auto;
   display: flex;
   flex-direction: row;
-  min-height: ;
 }
 .of-form-container {
   width: 30%;

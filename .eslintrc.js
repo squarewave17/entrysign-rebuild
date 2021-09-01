@@ -18,4 +18,7 @@ module.exports = {
       },
     ],
   },
+  globals: {
+    globalThis: false, // means it is not writeable
+  },
 };

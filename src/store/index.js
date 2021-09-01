@@ -17,6 +17,11 @@ export default createStore({
     themeStyle: "Light",
     logoUpload:
       "https://www.dashmedia.co.uk/wp-content/uploads/2020/08/logo.png",
+    additionalRFID: "",
+    additionalDesk: "",
+    additionalWall: "",
+    accessDoorControl: "",
+    misSystem: "",
   },
   mutations: {
     updateOrgSize(state, orgSize) {
@@ -61,6 +66,21 @@ export default createStore({
     updatelogo(state, logoUpload) {
       state.logoUpload = logoUpload;
     },
+    updateAdditionalRFID(state, additionalRFID) {
+      state.additionalRFID = additionalRFID;
+    },
+    updateAdditionalDesk(state, additionalDesk) {
+      state.additionalDesk = additionalDesk;
+    },
+    updateAdditionalWall(state, additionalWall) {
+      state.additionalWall = additionalWall;
+    },
+    updateAccessDoorControl(state, accessDoorControl) {
+      state.accessDoorControl = accessDoorControl;
+    },
+    updateMisSystem(state, misSystem) {
+      state.misSystem = misSystem;
+    },
   },
   actions: {},
   modules: {},
@@ -79,5 +99,10 @@ export default createStore({
     themeColour: (state) => state.themeColour,
     themeStyle: (state) => state.themeStyle,
     logoUpload: (state) => state.logoUpload,
+    additionalRFID: (state) => state.additionalRFID,
+    additionalDesk: (state) => state.additionalDesk,
+    additionalWall: (state) => state.additionalWall,
+    accessDoorControl: (state) => state.accessDoorControl,
+    misSystem: (state) => state.misSystem,
   },
 });

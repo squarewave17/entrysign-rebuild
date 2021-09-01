@@ -1,11 +1,13 @@
+/*! ofkit 3.7.2 | https://www.getofkit.com | (c) 2014 - 2021 YOOtheme | MIT License */
+
 (function (global, factory) {
   typeof exports === "object" && typeof module !== "undefined"
     ? (module.exports = factory())
     : typeof define === "function" && define.amd
-    ? define("OFKit", factory)
+    ? define("ofkit", factory)
     : ((global =
         typeof globalThis !== "undefined" ? globalThis : global || self),
-      (global.OFKit = factory()));
+      (global.ofkit = factory()));
 })(this, function () {
   "use strict";
 
@@ -643,15 +645,11 @@
   }
 
   function query(selector, context) {
-    return toNode(selector) || find(selector, getContext(selector, context));
+    return find(selector, getContext(selector, context));
   }
 
   function queryAll(selector, context) {
-    var nodes = toNodes(selector);
-    return (
-      (nodes.length && nodes) ||
-      findAll(selector, getContext(selector, context))
-    );
+    return findAll(selector, getContext(selector, context));
   }
 
   function getContext(selector, context) {
@@ -675,14 +673,14 @@
     if (context === void 0) context = document;
 
     if (!selector || !isString(selector)) {
-      return null;
+      return selector;
     }
 
     selector = selector.replace(contextSanitizeRe, "$1 *");
 
     if (isContextSelector(selector)) {
       selector = splitSelector(selector)
-        .map(function (selector, i) {
+        .map(function (selector) {
           var ctx = context;
 
           if (selector[0] === "!") {
@@ -1382,23 +1380,19 @@
   }
 
   function $(selector, context) {
-    return !isString(selector)
-      ? toNode(selector)
-      : isHtml(selector)
+    return isHtml(selector)
       ? toNode(fragment(selector))
       : find(selector, context);
   }
 
   function $$(selector, context) {
-    return !isString(selector)
-      ? toNodes(selector)
-      : isHtml(selector)
+    return isHtml(selector)
       ? toNodes(fragment(selector))
       : findAll(selector, context);
   }
 
   function isHtml(str) {
-    return str[0] === "<" || str.match(/^\s*</);
+    return isString(str) && (str[0] === "<" || str.match(/^\s*</));
   }
 
   function addClass(element) {
@@ -2341,7 +2335,7 @@
     } catch (e) {}
   }
 
-  var stateKey$1 = "_ukPlayer";
+  var stateKey$1 = "_ofPlayer";
   var counter = 0;
   function enableApi(el) {
     if (el[stateKey$1]) {
@@ -2431,11 +2425,7 @@
     var offsetBy = ref.offset;
     if (offsetBy === void 0) offsetBy = 0;
 
-    if (!isVisible(element)) {
-      return;
-    }
-
-    var parents = scrollParents(element);
+    var parents = isVisible(element) ? scrollParents(element) : [];
     var diff = 0;
     return parents.reduce(
       function (fn, scrollElement, i) {
@@ -2889,10 +2879,10 @@
     getViewportClientHeight: getViewportClientHeight,
   });
 
-  function globalAPI(OFKit) {
-    var DATA = OFKit.data;
+  function globalAPI(ofkit) {
+    var DATA = ofkit.data;
 
-    OFKit.use = function (plugin) {
+    ofkit.use = function (plugin) {
       if (plugin.installed) {
         return;
       }
@@ -2903,17 +2893,17 @@
       return this;
     };
 
-    OFKit.mixin = function (mixin, component) {
+    ofkit.mixin = function (mixin, component) {
       component =
-        (isString(component) ? OFKit.component(component) : component) || this;
+        (isString(component) ? ofkit.component(component) : component) || this;
       component.options = mergeOptions(component.options, mixin);
     };
 
-    OFKit.extend = function (options) {
+    ofkit.extend = function (options) {
       options = options || {};
 
       var Super = this;
-      var Sub = function OFKitComponent(options) {
+      var Sub = function ofkitComponent(options) {
         this._init(options);
       };
 
@@ -2927,7 +2917,7 @@
       return Sub;
     };
 
-    OFKit.update = function (element, e) {
+    ofkit.update = function (element, e) {
       element = element ? toNode(element) : document.body;
 
       parents(element)
@@ -2941,7 +2931,7 @@
     };
 
     var container;
-    Object.defineProperty(OFKit, "container", {
+    Object.defineProperty(ofkit, "container", {
       get: function () {
         return container || document.body;
       },
@@ -2964,8 +2954,8 @@
     }
   }
 
-  function hooksAPI(OFKit) {
-    OFKit.prototype._callHook = function (hook) {
+  function hooksAPI(ofkit) {
+    ofkit.prototype._callHook = function (hook) {
       var this$1 = this;
 
       var handlers = this.$options[hook];
@@ -2977,7 +2967,7 @@
       }
     };
 
-    OFKit.prototype._callConnected = function () {
+    ofkit.prototype._callConnected = function () {
       if (this._connected) {
         return;
       }
@@ -2997,7 +2987,7 @@
       this._callUpdate();
     };
 
-    OFKit.prototype._callDisconnected = function () {
+    ofkit.prototype._callDisconnected = function () {
       if (!this._connected) {
         return;
       }
@@ -3011,7 +3001,7 @@
       delete this._watch;
     };
 
-    OFKit.prototype._callUpdate = function (e) {
+    ofkit.prototype._callUpdate = function (e) {
       var this$1 = this;
       if (e === void 0) e = "update";
 
@@ -3030,7 +3020,9 @@
       if (!this._updates) {
         this._updates = new Set();
         fastdom.read(function () {
-          runUpdates.call(this$1, this$1._updates);
+          if (this$1._connected) {
+            runUpdates.call(this$1, this$1._updates);
+          }
           delete this$1._updates;
         });
       }
@@ -3038,38 +3030,19 @@
       this._updates.add(e.type || e);
     };
 
-    OFKit.prototype._callWatches = function () {
+    ofkit.prototype._callWatches = function () {
       var this$1 = this;
 
       if (this._watch) {
         return;
       }
 
-      var initital = !hasOwn(this, "_watch");
+      var initial = !hasOwn(this, "_watch");
 
       this._watch = fastdom.read(function () {
-        var ref = this$1;
-        var computed = ref.$options.computed;
-        var _computeds = ref._computeds;
-
-        for (var key in computed) {
-          var hasPrev = hasOwn(_computeds, key);
-          var prev = _computeds[key];
-
-          delete _computeds[key];
-
-          var ref$1 = computed[key];
-          var watch = ref$1.watch;
-          var immediate = ref$1.immediate;
-          if (
-            watch &&
-            ((initital && immediate) ||
-              (hasPrev && !isEqual(prev, this$1[key])))
-          ) {
-            watch.call(this$1, this$1[key], prev);
-          }
+        if (this$1._connected) {
+          runWatches.call(this$1, initial);
         }
-
         this$1._watch = null;
       });
     };
@@ -3113,12 +3086,35 @@
 
       for (var i = 0; i < updates.length; i++) loop(i);
     }
+
+    function runWatches(initial) {
+      var ref = this;
+      var computed = ref.$options.computed;
+      var _computeds = ref._computeds;
+
+      for (var key in computed) {
+        var hasPrev = hasOwn(_computeds, key);
+        var prev = _computeds[key];
+
+        delete _computeds[key];
+
+        var ref$1 = computed[key];
+        var watch = ref$1.watch;
+        var immediate = ref$1.immediate;
+        if (
+          watch &&
+          ((initial && immediate) || (hasPrev && !isEqual(prev, this[key])))
+        ) {
+          watch.call(this, this[key], prev);
+        }
+      }
+    }
   }
 
-  function stateAPI(OFKit) {
+  function stateAPI(ofkit) {
     var uid = 0;
 
-    OFKit.prototype._init = function (options) {
+    ofkit.prototype._init = function (options) {
       options = options || {};
       options.data = normalizeData(options, this.constructor.options);
 
@@ -3137,7 +3133,7 @@
       }
     };
 
-    OFKit.prototype._initData = function () {
+    ofkit.prototype._initData = function () {
       var ref = this.$options;
       var data = ref.data;
       if (data === void 0) data = {};
@@ -3147,7 +3143,7 @@
       }
     };
 
-    OFKit.prototype._initMethods = function () {
+    ofkit.prototype._initMethods = function () {
       var ref = this.$options;
       var methods = ref.methods;
 
@@ -3158,7 +3154,7 @@
       }
     };
 
-    OFKit.prototype._initComputeds = function () {
+    ofkit.prototype._initComputeds = function () {
       var ref = this.$options;
       var computed = ref.computed;
 
@@ -3171,7 +3167,7 @@
       }
     };
 
-    OFKit.prototype._initProps = function (props) {
+    ofkit.prototype._initProps = function (props) {
       var key;
 
       props = props || getProps(this.$options, this.$name);
@@ -3190,7 +3186,7 @@
       }
     };
 
-    OFKit.prototype._initEvents = function () {
+    ofkit.prototype._initEvents = function () {
       var this$1 = this;
 
       this._events = [];
@@ -3211,18 +3207,18 @@
       }
     };
 
-    OFKit.prototype._unbindEvents = function () {
+    ofkit.prototype._unbindEvents = function () {
       this._events.forEach(function (unbind) {
         return unbind();
       });
       delete this._events;
     };
 
-    OFKit.prototype._initObservers = function () {
+    ofkit.prototype._initObservers = function () {
       this._observers = [initChildListObserver(this), initPropsObserver(this)];
     };
 
-    OFKit.prototype._disconnectObservers = function () {
+    ofkit.prototype._disconnectObservers = function () {
       this._observers.forEach(function (observer) {
         return observer && observer.disconnect();
       });
@@ -3468,14 +3464,14 @@
     }
   }
 
-  function instanceAPI(OFKit) {
-    var DATA = OFKit.data;
+  function instanceAPI(ofkit) {
+    var DATA = ofkit.data;
 
-    OFKit.prototype.$create = function (component, element, data) {
-      return OFKit[component](element, data);
+    ofkit.prototype.$create = function (component, element, data) {
+      return ofkit[component](element, data);
     };
 
-    OFKit.prototype.$mount = function (el) {
+    ofkit.prototype.$mount = function (el) {
       var ref = this.$options;
       var name = ref.name;
 
@@ -3496,12 +3492,12 @@
       }
     };
 
-    OFKit.prototype.$reset = function () {
+    ofkit.prototype.$reset = function () {
       this._callDisconnected();
       this._callConnected();
     };
 
-    OFKit.prototype.$destroy = function (removeEl) {
+    ofkit.prototype.$destroy = function (removeEl) {
       if (removeEl === void 0) removeEl = false;
 
       var ref = this.$options;
@@ -3529,23 +3525,23 @@
       }
     };
 
-    OFKit.prototype.$emit = function (e) {
+    ofkit.prototype.$emit = function (e) {
       this._callUpdate(e);
     };
 
-    OFKit.prototype.$update = function (element, e) {
+    ofkit.prototype.$update = function (element, e) {
       if (element === void 0) element = this.$el;
 
-      OFKit.update(element, e);
+      ofkit.update(element, e);
     };
 
-    OFKit.prototype.$getComponent = OFKit.getComponent;
+    ofkit.prototype.$getComponent = ofkit.getComponent;
 
     var componentName = memoize(function (name) {
-      return OFKit.prefix + hyphenate(name);
+      return ofkit.prefix + hyphenate(name);
     });
-    Object.defineProperties(OFKit.prototype, {
-      $container: Object.getOwnPropertyDescriptor(OFKit, "container"),
+    Object.defineProperties(ofkit.prototype, {
+      $container: Object.getOwnPropertyDescriptor(ofkit, "container"),
 
       $name: {
         get: function () {
@@ -3555,30 +3551,30 @@
     });
   }
 
-  function componentAPI(OFKit) {
-    var DATA = OFKit.data;
+  function componentAPI(ofkit) {
+    var DATA = ofkit.data;
 
     var components = {};
 
-    OFKit.component = function (name, options) {
+    ofkit.component = function (name, options) {
       var id = hyphenate(name);
 
       name = camelize(id);
 
       if (!options) {
         if (isPlainObject(components[name])) {
-          components[name] = OFKit.extend(components[name]);
+          components[name] = ofkit.extend(components[name]);
         }
 
         return components[name];
       }
 
-      OFKit[name] = function (element, data) {
+      ofkit[name] = function (element, data) {
         var i = arguments.length,
           argsArray = Array(i);
         while (i--) argsArray[i] = arguments[i];
 
-        var component = OFKit.component(name);
+        var component = ofkit.component(name);
 
         return component.options.functional
           ? new component({
@@ -3589,7 +3585,7 @@
           : $$(element).map(init)[0];
 
         function init(element) {
-          var instance = OFKit.getComponent(element, name);
+          var instance = ofkit.getComponent(element, name);
 
           if (instance) {
             if (!data) {
@@ -3608,26 +3604,26 @@
       opt.name = name;
 
       if (opt.install) {
-        opt.install(OFKit, opt, name);
+        opt.install(ofkit, opt, name);
       }
 
-      if (OFKit._initialized && !opt.functional) {
+      if (ofkit._initialized && !opt.functional) {
         fastdom.read(function () {
-          return OFKit[name]("[of-" + id + "],[data-of-" + id + "]");
+          return ofkit[name]("[of-" + id + "],[data-of-" + id + "]");
         });
       }
 
       return (components[name] = isPlainObject(options) ? opt : options);
     };
 
-    OFKit.getComponents = function (element) {
+    ofkit.getComponents = function (element) {
       return (element && element[DATA]) || {};
     };
-    OFKit.getComponent = function (element, name) {
-      return OFKit.getComponents(element)[name];
+    ofkit.getComponent = function (element, name) {
+      return ofkit.getComponents(element)[name];
     };
 
-    OFKit.connect = function (node) {
+    ofkit.connect = function (node) {
       if (node[DATA]) {
         for (var name in node[DATA]) {
           node[DATA][name]._callConnected();
@@ -3638,12 +3634,12 @@
         var name$1 = getComponentName(node.attributes[i].name);
 
         if (name$1 && name$1 in components) {
-          OFKit[name$1](node);
+          ofkit[name$1](node);
         }
       }
     };
 
-    OFKit.disconnect = function (node) {
+    ofkit.disconnect = function (node) {
       for (var name in node[DATA]) {
         node[DATA][name]._callDisconnected();
       }
@@ -3656,23 +3652,23 @@
       : false;
   });
 
-  var OFKit = function (options) {
+  var ofkit = function (options) {
     this._init(options);
   };
 
-  OFKit.util = util;
-  OFKit.data = "__OFKit__";
-  OFKit.prefix = "of-";
-  OFKit.options = {};
-  OFKit.version = "3.6.22";
+  ofkit.util = util;
+  ofkit.data = "__ofkit__";
+  ofkit.prefix = "of-";
+  ofkit.options = {};
+  ofkit.version = "3.7.2";
 
-  globalAPI(OFKit);
-  hooksAPI(OFKit);
-  stateAPI(OFKit);
-  componentAPI(OFKit);
-  instanceAPI(OFKit);
+  globalAPI(ofkit);
+  hooksAPI(ofkit);
+  stateAPI(ofkit);
+  componentAPI(ofkit);
+  instanceAPI(ofkit);
 
-  function Core(OFKit) {
+  function Core(ofkit) {
     if (!inBrowser) {
       return;
     }
@@ -3687,7 +3683,7 @@
       fastdom.write(function () {
         return (pendingResize = false);
       });
-      OFKit.update(null, "resize");
+      ofkit.update(null, "resize");
     };
 
     on(window, "load resize", handleResize);
@@ -3711,7 +3707,7 @@
           return (pending = false);
         });
 
-        OFKit.update(null, e.type);
+        ofkit.update(null, e.type);
       },
       { passive: true, capture: true }
     );
@@ -3785,9 +3781,9 @@
       : "Down";
   }
 
-  function boot(OFKit) {
-    var connect = OFKit.connect;
-    var disconnect = OFKit.disconnect;
+  function boot(ofkit) {
+    var connect = ofkit.connect;
+    var disconnect = ofkit.disconnect;
 
     if (!inBrowser || !window.MutationObserver) {
       return;
@@ -3812,7 +3808,7 @@
         subtree: true,
       });
 
-      OFKit._initialized = true;
+      ofkit._initialized = true;
     });
 
     function applyChildListMutation(ref) {
@@ -3834,16 +3830,16 @@
 
       var name = getComponentName(attributeName);
 
-      if (!name || !(name in OFKit)) {
+      if (!name || !(name in ofkit)) {
         return;
       }
 
       if (hasAttr(target, attributeName)) {
-        OFKit[name](target);
+        ofkit[name](target);
         return;
       }
 
-      var component = OFKit.getComponent(target, name);
+      var component = ofkit.getComponent(target, name);
 
       if (component) {
         component.$destroy();
@@ -4385,6 +4381,26 @@
     }
   }
 
+  var Container = {
+    props: {
+      container: Boolean,
+    },
+
+    data: {
+      container: true,
+    },
+
+    computed: {
+      container: function (ref) {
+        var container = ref.container;
+
+        return (
+          (container === true && this.$container) || (container && $(container))
+        );
+      },
+    },
+  };
+
   var Position = {
     props: {
       pos: String,
@@ -4473,7 +4489,7 @@
   var active$1;
 
   var drop = {
-    mixins: [Position, Togglable],
+    mixins: [Container, Position, Togglable],
 
     args: "pos",
 
@@ -4497,6 +4513,7 @@
       clsDrop: false,
       animation: ["of-animation-fade"],
       cls: "of-open",
+      container: false,
     },
 
     computed: {
@@ -4524,14 +4541,12 @@
     connected: function () {
       addClass(this.$el, this.clsDrop);
 
-      var ref = this.$props;
-      var toggle = ref.toggle;
-      this.toggle =
-        toggle &&
-        this.$create("toggle", query(toggle, this.$el), {
+      if (this.toggle && !this.target) {
+        this.target = this.$create("toggle", query(this.toggle, this.$el), {
           target: this.$el,
           mode: this.mode,
         });
+      }
     },
 
     disconnected: function () {
@@ -4590,7 +4605,7 @@
           if (this.isToggled()) {
             this.hide(false);
           } else {
-            this.show(toggle, false);
+            this.show(toggle.$el, false);
           }
         },
       },
@@ -4602,7 +4617,7 @@
 
         handler: function (e, toggle) {
           e.preventDefault();
-          this.show(toggle);
+          this.show(toggle.$el);
         },
       },
 
@@ -4692,7 +4707,7 @@
                       !defaultPrevented &&
                       type === pointerUp &&
                       target === newTarget &&
-                      !(this$1.toggle && within(target, this$1.toggle.$el))
+                      !(this$1.target && within(target, this$1.target))
                     ) {
                       this$1.hide(false);
                     }
@@ -4758,21 +4773,21 @@
     },
 
     methods: {
-      show: function (toggle, delay) {
+      show: function (target, delay) {
         var this$1 = this;
-        if (toggle === void 0) toggle = this.toggle;
+        if (target === void 0) target = this.target;
         if (delay === void 0) delay = true;
 
         if (
           this.isToggled() &&
-          toggle &&
-          this.toggle &&
-          toggle.$el !== this.toggle.$el
+          target &&
+          this.target &&
+          target !== this.target
         ) {
           this.hide(false);
         }
 
-        this.toggle = toggle;
+        this.target = target;
 
         this.clearTimers();
 
@@ -4797,8 +4812,12 @@
           }
         }
 
+        if (this.container && parent(this.$el) !== this.container) {
+          append(this.container, this.$el);
+        }
+
         this.showTimer = setTimeout(function () {
-          return !this$1.isToggled() && this$1.toggleElement(this$1.$el, true);
+          return this$1.toggleElement(this$1.$el, true);
         }, (delay && this.delayShow) || 0);
       },
 
@@ -4842,7 +4861,7 @@
         toggleClass(this.$el, this.clsDrop + "-boundary", this.boundaryAlign);
 
         var boundary = offset(this.boundary);
-        var alignTo = this.boundaryAlign ? boundary : offset(this.toggle.$el);
+        var alignTo = this.boundaryAlign ? boundary : offset(this.target);
 
         if (this.align === "justify") {
           var prop = this.getAxis() === "y" ? "width" : "height";
@@ -4860,7 +4879,7 @@
 
         this.positionAt(
           this.$el,
-          this.boundaryAlign ? this.boundary : this.toggle.$el,
+          this.boundaryAlign ? this.boundary : this.target,
           this.boundary
         );
       },
@@ -5970,8 +5989,8 @@
   };
 
   var parsed = {};
-  function install$3(OFKit) {
-    OFKit.icon.add = function (name, svg) {
+  function install$3(ofkit) {
+    ofkit.icon.add = function (name, svg) {
       var obj;
 
       var added = isString(name) ? ((obj = {}), (obj[name] = svg), obj) : name;
@@ -5980,9 +5999,9 @@
         delete parsed[name];
       });
 
-      if (OFKit._initialized) {
+      if (ofkit._initialized) {
         apply$1(document.body, function (el) {
-          return each(OFKit.getComponents(el), function (cmp) {
+          return each(ofkit.getComponents(el), function (cmp) {
             cmp.$options.isIcon && cmp.icon in added && cmp.$reset();
           });
         });
@@ -6204,9 +6223,12 @@
 
   function setSrcAttrs(el, src, srcset, sizes) {
     if (isImg(el)) {
-      sizes && (el.sizes = sizes);
-      srcset && (el.srcset = srcset);
-      src && (el.src = src);
+      var set = function (prop, val) {
+        return val && val !== el[prop] && (el[prop] = val);
+      };
+      set("sizes", sizes);
+      set("srcset", srcset);
+      set("src", src);
     } else if (src) {
       var change = !includes(el.style.backgroundImage, src);
       if (change) {
@@ -6403,26 +6425,6 @@
       },
 
       events: ["resize"],
-    },
-  };
-
-  var Container = {
-    props: {
-      container: Boolean,
-    },
-
-    data: {
-      container: true,
-    },
-
-    computed: {
-      container: function (ref) {
-        var container = ref.container;
-
-        return (
-          (container === true && this.$container) || (container && $(container))
-        );
-      },
     },
   };
 
@@ -6877,8 +6879,10 @@
     },
   };
 
+  var navItem = ".of-navbar-nav > li > a, .of-navbar-item, .of-navbar-toggle";
+
   var navbar = {
-    mixins: [Class, FlexBug],
+    mixins: [Class, Container, FlexBug],
 
     props: {
       dropdown: String,
@@ -6897,7 +6901,7 @@
     },
 
     data: {
-      dropdown: ".of-navbar-nav > li",
+      dropdown: navItem,
       align: !isRtl ? "left" : "right",
       clsDrop: "of-navbar-dropdown",
       mode: undefined,
@@ -6912,8 +6916,8 @@
       dropbarAnchor: false,
       duration: 200,
       forceHeight: true,
-      selMinHeight:
-        ".of-navbar-nav > li > a, .of-navbar-item, .of-navbar-toggle",
+      selMinHeight: navItem,
+      container: false,
     },
 
     computed: {
@@ -6959,12 +6963,23 @@
         immediate: true,
       },
 
+      dropContainer: function (_, $el) {
+        return this.container || $el;
+      },
+
       dropdowns: {
         get: function (ref, $el) {
-          var dropdown = ref.dropdown;
           var clsDrop = ref.clsDrop;
 
-          return $$(dropdown + " ." + clsDrop, $el);
+          var dropdowns = $$("." + clsDrop, $el);
+
+          if (this.container !== $el) {
+            $$("." + clsDrop, this.container).forEach(function (el) {
+              return !includes(dropdowns, el) && dropdowns.push(el);
+            });
+          }
+
+          return dropdowns;
         },
 
         watch: function (dropdowns) {
@@ -7006,8 +7021,8 @@
           var active = this.getActive();
           if (
             active &&
-            active.toggle &&
-            !within(active.toggle.$el, current) &&
+            active.target &&
+            !within(active.target, current) &&
             !active.tracker.movesTo(active.$el)
           ) {
             active.hide(false);
@@ -7039,7 +7054,9 @@
       {
         name: "beforeshow",
 
-        capture: true,
+        el: function () {
+          return this.dropContainer;
+        },
 
         filter: function () {
           return this.dropbar;
@@ -7054,6 +7071,10 @@
 
       {
         name: "show",
+
+        el: function () {
+          return this.dropContainer;
+        },
 
         filter: function () {
           return this.dropbar;
@@ -7087,6 +7108,10 @@
       {
         name: "beforehide",
 
+        el: function () {
+          return this.dropContainer;
+        },
+
         filter: function () {
           return this.dropbar;
         },
@@ -7104,6 +7129,10 @@
 
       {
         name: "hide",
+
+        el: function () {
+          return this.dropContainer;
+        },
 
         filter: function () {
           return this.dropbar;
@@ -7127,15 +7156,11 @@
 
     methods: {
       getActive: function () {
-        var ref = this.dropdowns.map(this.getDropdown).filter(function (drop) {
-          return drop && drop.isActive();
-        });
-        var active = ref[0];
         return (
-          active &&
-          includes(active.mode, "hover") &&
-          within(active.toggle.$el, this.$el) &&
-          active
+          active$1 &&
+          includes(active$1.mode, "hover") &&
+          within(active$1.target, this.$el) &&
+          active$1
         );
       },
 
@@ -7327,7 +7352,7 @@
             return;
           }
 
-          var clientY = event.targetTouches[0].clientY - this.clientY;
+          var clientY = e.targetTouches[0].clientY - this.clientY;
           var ref = this.panel;
           var scrollTop = ref.scrollTop;
           var scrollHeight = ref.scrollHeight;
@@ -7569,7 +7594,7 @@
     },
   };
 
-  var stateKey = "_ukScrollspy";
+  var stateKey = "_ofScrollspy";
   var scrollspy = {
     args: "cls",
 
@@ -7710,7 +7735,7 @@
 
         if (/\bof-animation-/.test(state.cls)) {
           state.off = once(el, "animationcancel animationend", function () {
-            return removeClasses(el, "of-animation-\\w*");
+            return removeClasses(el, "of-animation-[\\w-]+");
           });
         }
 
@@ -7819,16 +7844,17 @@
         write: function (ref) {
           var active = ref.active;
 
+          var changed =
+            active !== false && !hasClass(this.elements[active], this.cls);
+
           this.links.forEach(function (el) {
             return el.blur();
           });
           removeClass(this.elements, this.cls);
+          addClass(this.elements[active], this.cls);
 
-          if (active !== false) {
-            trigger(this.$el, "active", [
-              active,
-              addClass(this.elements[active], this.cls),
-            ]);
+          if (changed) {
+            trigger(this.$el, "active", [active, this.elements[active]]);
           }
         },
 
@@ -8605,13 +8631,13 @@
 
   // register components
   each(components$1, function (component, name) {
-    return OFKit.component(name, component);
+    return ofkit.component(name, component);
   });
 
   // core functionality
-  OFKit.use(Core);
+  ofkit.use(Core);
 
-  boot(OFKit);
+  boot(ofkit);
 
   var countdown = {
     mixins: [Class],
@@ -8817,7 +8843,7 @@
 
       css(children(target), { opacity: 0 });
 
-      // Ensure OFKit updates have propagated
+      // Ensure ofkit updates have propagated
       return new Promise$1(function (resolve) {
         return requestAnimationFrame(function () {
           var nodes = children(target);
@@ -10710,12 +10736,12 @@
     },
   };
 
-  function install$1(OFKit, Lightbox) {
-    if (!OFKit.lightboxPanel) {
-      OFKit.component("lightboxPanel", LightboxPanel);
+  function install$1(ofkit, Lightbox) {
+    if (!ofkit.lightboxPanel) {
+      ofkit.component("lightboxPanel", LightboxPanel);
     }
 
-    assign(Lightbox.props, OFKit.component("lightboxPanel").options.props);
+    assign(Lightbox.props, ofkit.component("lightboxPanel").options.props);
   }
 
   function toItem(el) {
@@ -10865,10 +10891,10 @@
     },
   };
 
-  function install(OFKit) {
-    OFKit.notification.closeAll = function (group, immediate) {
+  function install(ofkit) {
+    ofkit.notification.closeAll = function (group, immediate) {
       apply$1(document.body, function (el) {
-        var notification = OFKit.getComponent(el, "notification");
+        var notification = ofkit.getComponent(el, "notification");
         if (notification && (!group || group === notification.group)) {
           notification.close(immediate);
         }
@@ -11442,7 +11468,7 @@
 
         percent = prev ? clamp(percent, -1, 1) : 0;
 
-        children(list).forEach(function (slide, i) {
+        children(list).forEach(function (slide) {
           var isActive = includes(actives, slide);
           var isIn = slide === itemIn;
           var isOut = slide === itemOut;
@@ -11747,8 +11773,9 @@
       },
 
       itemshow: function () {
-        ~this.prevIndex &&
+        if (~this.prevIndex) {
           addClass(this._getTransitioner().getItemIn(), this.clsActive);
+        }
       },
     },
 
@@ -12921,8 +12948,8 @@
   });
 
   each(components, function (component, name) {
-    return OFKit.component(name, component);
+    return ofkit.component(name, component);
   });
 
-  return OFKit;
+  return ofkit;
 });
