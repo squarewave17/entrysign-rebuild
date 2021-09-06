@@ -9,13 +9,13 @@ import Software from "../views/Software.vue";
 import InfectionControlPackage from "../views/InfectionControlPackage.vue";
 import ProductAddons from "../views/ProductAddons.vue";
 import Summary from "../views/Summary.vue";
-import EntrysignAddons from "../views/EntrysignAddons.vue";
-import FobsTokens from "../views/FobsTokens.vue";
-import Terminals from "../views/Terminals.vue";
-// import Addons from "../views/Addons.vue";
-import LabelsCards from "../views/LabelsCards.vue";
-import IdCards from "../views/IdCards.vue";
-import Lanyards from "../views/Lanyards.vue";
+import EntrysignAddons from "../views/sub-views/EntrysignAddons.vue";
+import FobsTokens from "../views/sub-views/FobsTokens.vue";
+import Terminals from "../views/sub-views/Terminals.vue";
+import AcNav from "../views/AcNav.vue";
+import LabelsCards from "../views/sub-views/LabelsCards.vue";
+import IdCards from "../views/sub-views/IdCards.vue";
+import Lanyards from "../views/sub-views/Lanyards.vue";
 
 const routes = [
   {
@@ -63,7 +63,7 @@ const routes = [
     name: "Product Addons",
     component: ProductAddons,
     children: [
-      // { path: "product-addons", component: Addons },
+      { path: "", component: AcNav },
       { path: "entrysign-addons", component: EntrysignAddons },
       { path: "fobs-and-tokens", component: FobsTokens },
       { path: "terminals", component: Terminals },

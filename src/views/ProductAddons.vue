@@ -2,22 +2,24 @@
   <div class="page-container">
     <Header msg="Product Addons" />
     <navBar />
-    <p>
+    <div>
       <router-link to="/product-addons/entrysign-addons"
         >Entrysign Addons</router-link
-      >
+      ><span>></span>
       <router-link to="/product-addons/fobs-and-tokens"
         >Fobs and Tokens</router-link
-      >
-      <router-link to="/product-addons/terminals">Terminals</router-link>
+      ><span>></span>
+      <router-link to="/product-addons/terminals">Terminals</router-link
+      ><span>></span>
       <router-link to="/product-addons/labels-cards"
         >Labels and Cards</router-link
-      >
-      <router-link to="/product-addons/id-cards"
-        >Id Cards & Holders</router-link
-      >
-      <router-link to="/product-addons/lanyards">LAnyards & YoYo's</router-link>
-    </p>
+      ><span>></span>
+      <router-link to="/product-addons/id-cards">Id Cards & Holders</router-link
+      ><span>></span>
+      <router-link to="/product-addons/lanyards">LAnyards & YoYo's</router-link
+      ><span>></span>
+    </div>
+
     <router-view></router-view>
   </div>
 </template>
@@ -38,3 +40,12 @@ export default {
   },
 };
 </script>
+
+<style>
+span {
+  font-size: 17px;
+  font-weight: bold;
+  color: var(--of-dark-ac);
+  padding: 5px;
+}
+</style>

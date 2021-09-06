@@ -1,23 +1,7 @@
 <template>
   <label v-if="label" class="of-form-label">{{ label }}</label>
   <div class="input-container">
-    <span class="of-m-3"
-      ><svg
-        width="20"
-        height="20"
-        viewBox="0 0 20 20"
-        xmlns="http://www.w3.org/2000/svg"
-      >
-        <circle
-          fill="none"
-          stroke="#000"
-          stroke-width="1.1"
-          cx="9.5"
-          cy="9.5"
-          r="9"
-        />
-        <line fill="none" stroke="#000" x1="5" y1="9.5" x2="14" y2="9.5" /></svg
-    ></span>
+    <span class="of-m-3"><span of-icon="icon: minus-circle"></span></span>
 
     <input
       v-bind="$attrs"
@@ -27,25 +11,7 @@
       @input="$emit('update:modelValue', $event.target.value)"
     />
 
-    <span class="of-m-3"
-      ><svg
-        width="20"
-        height="20"
-        viewBox="0 0 20 20"
-        xmlns="http://www.w3.org/2000/svg"
-        @click="qtyIncrease"
-      >
-        <circle
-          fill="none"
-          stroke="#000"
-          stroke-width="1.1"
-          cx="9.5"
-          cy="9.5"
-          r="9"
-        />
-        <line fill="none" stroke="#000" x1="9.5" y1="5" x2="9.5" y2="14" />
-        <line fill="none" stroke="#000" x1="5" y1="9.5" x2="14" y2="9.5" /></svg
-    ></span>
+    <span class="of-m-3"><span of-icon="icon: plus-circle"></span></span>
   </div>
 </template>
 
