@@ -1,7 +1,5 @@
 <template>
   <div class="page-container">
-    <Header msg="Product Addons" />
-    <navBar />
     <p>
       <router-link to="/product-addons/entrysign-addons"
         >Entrysign Addons</router-link
@@ -18,23 +16,7 @@
       >
       <router-link to="/product-addons/lanyards">LAnyards & YoYo's</router-link>
     </p>
-    <router-view></router-view>
   </div>
 </template>
 
-<script>
-// @ is an alias to /src
-import Header from "@/components/Header.vue";
-import navBar from "@/components/navBar.vue";
-
-export default {
-  name: "Home",
-  components: {
-    Header,
-    navBar,
-  },
-  data() {
-    return {};
-  },
-};
-</script>
+<script></script>

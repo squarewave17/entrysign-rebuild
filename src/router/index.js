@@ -9,6 +9,13 @@ import Software from "../views/Software.vue";
 import InfectionControlPackage from "../views/InfectionControlPackage.vue";
 import ProductAddons from "../views/ProductAddons.vue";
 import Summary from "../views/Summary.vue";
+import EntrysignAddons from "../views/EntrysignAddons.vue";
+import FobsTokens from "../views/FobsTokens.vue";
+import Terminals from "../views/Terminals.vue";
+// import Addons from "../views/Addons.vue";
+import LabelsCards from "../views/LabelsCards.vue";
+import IdCards from "../views/IdCards.vue";
+import Lanyards from "../views/Lanyards.vue";
 
 const routes = [
   {
@@ -55,6 +62,15 @@ const routes = [
     path: "/product-addons",
     name: "Product Addons",
     component: ProductAddons,
+    children: [
+      // { path: "product-addons", component: Addons },
+      { path: "entrysign-addons", component: EntrysignAddons },
+      { path: "fobs-and-tokens", component: FobsTokens },
+      { path: "terminals", component: Terminals },
+      { path: "labels-cards", component: LabelsCards },
+      { path: "id-cards", component: IdCards },
+      { path: "lanyards", component: Lanyards },
+    ],
   },
   {
     path: "/summary",

@@ -3,18 +3,8 @@
   <navBar />
   <div class="of-container">
     <div class="of-flex of-flex-center">
-      <ImgRadio
-        v-model="info.radTest"
-        value="Multi"
-        name="start"
-        img="OrganisationMan.png"
-      />
-      <ImgRadio
-        v-model="info.radTest2"
-        value="desk"
-        name="start"
-        img="Organisation2.png"
-      />
+      <BaseRadio v-model="info.icpNo" value="Multi" name="icp" label="No" />
+      <BaseRadio v-model="info.icpYes" value="desk" name="icp" label="yes" />
     </div>
   </div>
 </template>
@@ -23,20 +13,20 @@
 // @ is an alias to /src
 import Header from "@/components/Header.vue";
 import navBar from "@/components/navBar.vue";
-import ImgRadio from "@/components/ImgRadio.vue";
+import BaseRadio from "@/components/BaseRadio.vue";
 
 export default {
   name: "ICP",
   components: {
     Header,
     navBar,
-    ImgRadio,
+    BaseRadio,
   },
   data() {
     return {
       info: {
-        radTest: "",
-        radTest2: "",
+        icpNo: "",
+        icpYes: "",
       },
     };
   },

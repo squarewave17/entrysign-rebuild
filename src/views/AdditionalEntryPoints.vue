@@ -16,12 +16,13 @@
     <div of-grid class="of-child-width-expand@s of-text-center">
       <div class="of-flex of-flex-column">
         <img class="of-p-8" src="@/assets/Screen1.png" />
-        <BaseInput
+        <QtyInput
           label="RFID Terminal"
           v-model="additionalRFID"
           type="number"
           @input="updateAdditionalRFID"
         />
+        <p>Value: {{ value }}</p>
       </div>
       <div class="of-flex of-flex-column">
         <img class="of-p-8" src="@/assets/deskmount.png" />
@@ -50,6 +51,7 @@
 import Header from "@/components/Header.vue";
 import navBar from "@/components/navBar.vue";
 import BaseInput from "@/components/BaseInput.vue";
+import QtyInput from "@/components/QtyInput.vue";
 
 export default {
   name: "Additional Entry Points",
@@ -57,6 +59,7 @@ export default {
     Header,
     navBar,
     BaseInput,
+    QtyInput,
   },
   data() {
     return {
