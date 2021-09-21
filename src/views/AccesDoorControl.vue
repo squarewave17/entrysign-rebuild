@@ -18,7 +18,6 @@ import navBar from "@/components/navBar.vue";
 import BaseSelect from "@/components/BaseSelect.vue";
 
 export default {
-  name: "Home",
   components: {
     Header,
     navBar,

@@ -56,7 +56,7 @@
         </div>
       </form>
     </div>
-    <Customiser />
+    <Customiser :textColor="textColor" />
   </div>
 </template>
 
@@ -67,6 +67,7 @@ import navBar from "@/components/navBar.vue";
 import BaseInput from "@/components/BaseInput.vue";
 import BaseSelect from "@/components/BaseSelect.vue";
 import Customiser from "@/components/Customiser.vue";
+import chroma from "chroma-js";
 
 export default {
   name: "Home",
@@ -91,6 +92,7 @@ export default {
         themeStyle: "",
         logoUpload: "",
       },
+      textColor: "",
     };
   },
   methods: {
@@ -105,13 +107,21 @@ export default {
     },
     updateThemeColour(e) {
       this.$store.commit("updateThemeColour", e.target.value);
+      const luminance = chroma(e.target.value).luminance();
+      if (luminance < 0.3 && this.themeStyle == "Filled") {
+        this.textColor = "#fff";
+      } else {
+        this.textColor = "#141414";
+      }
     },
     updateThemeStyle(e) {
       this.$store.commit("updateThemeStyle", e.target.value);
+      this.themeStyle = e.target.value;
     },
     updatelogo(e) {
       this.$store.commit("updatelogo", e.target.value);
     },
+    checkContrast() {},
   },
 };
 </script>

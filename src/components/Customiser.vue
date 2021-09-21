@@ -13,8 +13,8 @@
         <img :src="logoUpload" />
         <!-- <img src="@/assets/EntrySignBlackcopy.png" /> -->
         <div>
-          <h1>Welcome</h1>
-          <h2>Please Select an Option</h2>
+          <h1 :style="'color:' + textColor">Welcome</h1>
+          <h2 :style="'color:' + textColor">Please Select an Option</h2>
         </div>
       </div>
     </div>
@@ -34,6 +34,7 @@
 <script>
 import { mapState } from "vuex";
 import AppButton from "@/components/AppButton.vue";
+
 export default {
   name: "Customiser",
   components: {
@@ -41,6 +42,12 @@ export default {
   },
   data() {
     return {};
+  },
+  props: {
+    textColor: {
+      type: String,
+      default: "#141414",
+    },
   },
   computed: {
     ...mapState(["themeColour", "themeStyle", "logoUpload"]),

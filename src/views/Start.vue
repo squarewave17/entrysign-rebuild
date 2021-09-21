@@ -27,14 +27,14 @@
       />
     </div>
   </div>
-  <BasicDetails />
+  <!-- <BasicDetails /> -->
 </template>
 
 <script>
 // @ is an alias to /src
 import Header from "@/components/Header.vue";
 import navBar from "@/components/navBar.vue";
-import BasicDetails from "@/components/BasicDetails.vue";
+// import BasicDetails from "@/components/BasicDetails.vue";
 
 import ImgRadio from "@/components/ImgRadio.vue";
 
@@ -43,7 +43,7 @@ export default {
   components: {
     Header,
     navBar,
-    BasicDetails,
+    // BasicDetails,
 
     ImgRadio,
   },
