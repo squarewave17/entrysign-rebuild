@@ -1,3 +1,4 @@
+<!-- SYSTEM CONFIGUTATOR -->
 <template>
   <Header msg="Start" />
   <navBar />

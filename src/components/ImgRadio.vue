@@ -47,7 +47,7 @@ input[type="radio"] {
   flex-direction: column;
   justify-content: center;
   align-items: center;
-  border: 2px solid #fff;
+  /* border: 2px solid #fff; */
   border-radius: 10px;
   padding: 10px;
   position: relative;

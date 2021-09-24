@@ -1,4 +1,5 @@
 <template>
+  <!-- Temporary view for build purposes -->
   <SideBar />
   <router-view />
 </template>
