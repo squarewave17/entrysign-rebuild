@@ -14,16 +14,16 @@ export default {
   props: {
     label: {
       type: String,
-      default: "",
+      default: '',
     },
     modelValue: {
       type: [String, Number],
-      default: "",
+      default: '',
     },
     value: {
       type: String,
       required: true,
     },
   },
-};
+}
 </script>

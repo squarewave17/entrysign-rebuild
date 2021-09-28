@@ -19,11 +19,11 @@ export default {
   props: {
     label: {
       type: String,
-      default: "",
+      default: '',
     },
     modelValue: {
       type: [String, Number],
-      default: "",
+      default: '',
     },
     value: {
       type: String,
@@ -34,11 +34,11 @@ export default {
       required: true,
     },
   },
-};
+}
 </script>
 
 <style scoped>
-input[type="radio"] {
+input[type='radio'] {
   display: none;
 }
 
@@ -58,13 +58,10 @@ input[type="radio"] {
   cursor: pointer;
 }
 
-img {
-}
-
 .imgWrap:before {
   background-color: white;
   color: white;
-  content: " ";
+  content: ' ';
   border-radius: 50%;
   border: 1px solid grey;
   position: absolute;
@@ -78,18 +75,18 @@ img {
   transform: scale(0);
 }
 
-input[type="radio"]:checked + .imgWrap {
+input[type='radio']:checked + .imgWrap {
   border-color: var(--of-light);
   background-color: var(--of-light);
 }
 
-input[type="radio"]:checked + .imgWrap:before {
-  content: "✓";
+input[type='radio']:checked + .imgWrap:before {
+  content: '✓';
   background-color: grey;
   transform: scale(1);
 }
 
-input[type="radio"]:checked + .imgWrap {
+input[type='radio']:checked + .imgWrap {
   transform: scale(0.9);
   /* box-shadow: 0 0 5px #333; */
   z-index: -1;

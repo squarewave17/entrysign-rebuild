@@ -11,28 +11,28 @@
 </template>
 
 <script>
-import { mapState } from "vuex";
+import { mapState } from 'vuex'
 export default {
-  name: "AppButton",
+  name: 'AppButton',
   data() {
-    return {};
+    return {}
   },
   computed: {
-    ...mapState(["themeColour", "buttonFill"]),
+    ...mapState(['themeColour', 'buttonFill']),
     buttonClass() {
       return {
         rectangle:
-          this.$store.state.buttonShape == "Rectangle" ||
-          this.$store.state.buttonShape == "Rounded",
-        rounded: this.$store.state.buttonShape == "Rounded",
+          this.$store.state.buttonShape == 'Rectangle' ||
+          this.$store.state.buttonShape == 'Rounded',
+        rounded: this.$store.state.buttonShape == 'Rounded',
         square:
-          this.$store.state.buttonShape == "Square" ||
-          this.$store.state.buttonShape == "Circle",
-        circle: this.$store.state.buttonShape == "Circle",
-      };
+          this.$store.state.buttonShape == 'Square' ||
+          this.$store.state.buttonShape == 'Circle',
+        circle: this.$store.state.buttonShape == 'Circle',
+      }
     },
   },
-};
+}
 </script>
 
 <style scoped>

@@ -11,12 +11,12 @@
 
 <script>
 // @ is an alias to /src
-import Header from "@/components/Header.vue";
-import navBar from "@/components/navBar.vue";
-import BaseRadio from "@/components/BaseRadio.vue";
+import Header from '@/components/Header.vue'
+import navBar from '@/components/navBar.vue'
+import BaseRadio from '@/components/BaseRadio.vue'
 
 export default {
-  name: "ICP",
+  name: 'ICP',
   components: {
     Header,
     navBar,
@@ -25,10 +25,10 @@ export default {
   data() {
     return {
       info: {
-        icpNo: "",
-        icpYes: "",
+        icpNo: '',
+        icpYes: '',
       },
-    };
+    }
   },
-};
+}
 </script>

@@ -13,9 +13,9 @@
 
 <script>
 // @ is an alias to /src
-import Header from "@/components/Header.vue";
-import navBar from "@/components/navBar.vue";
-import BaseSelect from "@/components/BaseSelect.vue";
+import Header from '@/components/Header.vue'
+import navBar from '@/components/navBar.vue'
+import BaseSelect from '@/components/BaseSelect.vue'
 
 export default {
   components: {
@@ -25,16 +25,16 @@ export default {
   },
   data() {
     return {
-      adcoptions: ["Paxton", "Stanley", "Other"],
+      adcoptions: ['Paxton', 'Stanley', 'Other'],
       info: {
-        doorAcces: "",
+        doorAcces: '',
       },
-    };
+    }
   },
   methods: {
     updateAccessDoorControl(e) {
-      this.$store.commit("updateAccessDoorControl", e.target.value);
+      this.$store.commit('updateAccessDoorControl', e.target.value)
     },
   },
-};
+}
 </script>

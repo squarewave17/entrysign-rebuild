@@ -26,44 +26,44 @@
 export default {
   data() {
     return {
-      number: "0",
-    };
+      number: '0',
+    }
   },
   props: {
     label: {
       type: String,
-      default: "",
+      default: '',
     },
     modelValue: {
       type: [String, Number],
-      default: "",
+      default: '',
     },
   },
   computed: {
     internalValue: {
       get() {
-        return this.value;
+        return this.value
       },
       set(value) {
-        this.$emit("input", value);
+        this.$emit('input', value)
       },
     },
   },
   methods: {
     incrementDecrementNumber(action) {
       switch (action) {
-        case "+":
-          this.$refs["input"].stepUp();
-          break;
-        case "-":
-          this.$refs["input"].stepDown();
-          break;
+        case '+':
+          this.$refs['input'].stepUp()
+          break
+        case '-':
+          this.$refs['input'].stepDown()
+          break
       }
       /* Need to manually $emit here since the above methods doesn't trigger our computed set method. */
-      this.$emit("input", this.$refs["input"].value);
+      this.$emit('input', this.$refs['input'].value)
     },
   },
-};
+}
 </script>
 
 <style>
@@ -75,7 +75,7 @@ input::-webkit-inner-spin-button {
 }
 
 /* Firefox */
-input[type="number"] {
+input[type='number'] {
   -moz-appearance: textfield;
 }
 .input-container {

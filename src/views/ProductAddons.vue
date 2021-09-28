@@ -26,19 +26,19 @@
 
 <script>
 // @ is an alias to /src
-import Header from "@/components/Header.vue";
-import navBar from "@/components/navBar.vue";
+import Header from '@/components/Header.vue'
+import navBar from '@/components/navBar.vue'
 
 export default {
-  name: "Home",
+  name: 'Home',
   components: {
     Header,
     navBar,
   },
   data() {
-    return {};
+    return {}
   },
-};
+}
 </script>
 
 <style>

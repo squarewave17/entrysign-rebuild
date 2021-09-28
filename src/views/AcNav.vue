@@ -34,13 +34,13 @@
 </template>
 
 <script>
-import ImgLink from "@/components/ImgLink.vue";
+import ImgLink from '@/components/ImgLink.vue'
 
 export default {
   components: {
     ImgLink,
   },
-};
+}
 </script>
 
 <style scoped>

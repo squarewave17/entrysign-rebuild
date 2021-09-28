@@ -33,14 +33,14 @@
 
 <script>
 // @ is an alias to /src
-import Header from "@/components/Header.vue";
-import navBar from "@/components/navBar.vue";
+import Header from '@/components/Header.vue'
+import navBar from '@/components/navBar.vue'
 // import BasicDetails from "@/components/BasicDetails.vue";
 
-import ImgRadio from "@/components/ImgRadio.vue";
+import ImgRadio from '@/components/ImgRadio.vue'
 
 export default {
-  name: "Start",
+  name: 'Start',
   components: {
     Header,
     navBar,
@@ -51,17 +51,17 @@ export default {
   data() {
     return {
       info: {
-        orgSize: "",
+        orgSize: '',
       },
-    };
+    }
   },
   methods: {
     updateOrgSize(e) {
-      console.log("triggered");
-      this.$store.commit("updateOrgSize", e.target.value);
+      console.log('triggered')
+      this.$store.commit('updateOrgSize', e.target.value)
     },
   },
-};
+}
 </script>
 
 <style scoped></style>

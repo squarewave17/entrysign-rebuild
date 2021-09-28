@@ -6,7 +6,7 @@
     v-bind="{
       ...$attrs,
       onChange: ($event) => {
-        $emit('update:modelValue', $event.target.value);
+        $emit('update:modelValue', $event.target.value)
       },
     }"
   >
@@ -26,16 +26,16 @@ export default {
   props: {
     label: {
       trype: String,
-      default: "",
+      default: '',
     },
     modelValue: {
       type: [String, Number],
-      default: "",
+      default: '',
     },
     options: {
       type: Array,
       required: true,
     },
   },
-};
+}
 </script>

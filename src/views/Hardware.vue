@@ -57,13 +57,13 @@
 
 <script>
 // @ is an alias to /src
-import Header from "@/components/Header.vue";
-import navBar from "@/components/navBar.vue";
-import ImgRadio from "@/components/ImgRadio.vue";
-import ListItem from "@/components/ListItem.vue";
+import Header from '@/components/Header.vue'
+import navBar from '@/components/navBar.vue'
+import ImgRadio from '@/components/ImgRadio.vue'
+import ListItem from '@/components/ListItem.vue'
 
 export default {
-  name: "Hardware",
+  name: 'Hardware',
   components: {
     Header,
     navBar,
@@ -73,15 +73,15 @@ export default {
   data() {
     return {
       info: {
-        hardwareOption: "",
+        hardwareOption: '',
       },
-    };
+    }
   },
   methods: {
     updateHardwareType(e) {
-      console.log("triggered");
-      this.$store.commit("updateHardwareType", e.target.value);
+      console.log('triggered')
+      this.$store.commit('updateHardwareType', e.target.value)
     },
   },
-};
+}
 </script>

@@ -62,15 +62,15 @@
 
 <script>
 // @ is an alias to /src
-import Header from "@/components/Header.vue";
-import navBar from "@/components/navBar.vue";
-import BaseInput from "@/components/BaseInput.vue";
-import BaseSelect from "@/components/BaseSelect.vue";
-import Customiser from "@/components/Customiser.vue";
-import chroma from "chroma-js";
+import Header from '@/components/Header.vue'
+import navBar from '@/components/navBar.vue'
+import BaseInput from '@/components/BaseInput.vue'
+import BaseSelect from '@/components/BaseSelect.vue'
+import Customiser from '@/components/Customiser.vue'
+import chroma from 'chroma-js'
 
 export default {
-  name: "Home",
+  name: 'Home',
   components: {
     Header,
     navBar,
@@ -80,50 +80,50 @@ export default {
   },
   data() {
     return {
-      layoutOptions: ["Vertical", "Horizontal"],
-      buttonFills: ["Outline", "Solid"],
-      buttonShapes: ["Rectangle", "Rounded", "Square", "Circle"],
-      themeStyles: ["Filled", "Light"],
+      layoutOptions: ['Vertical', 'Horizontal'],
+      buttonFills: ['Outline', 'Solid'],
+      buttonShapes: ['Rectangle', 'Rounded', 'Square', 'Circle'],
+      themeStyles: ['Filled', 'Light'],
       info: {
-        layout: "",
-        buttonFill: "",
-        buttonShape: "",
-        themeColour: "",
-        themeStyle: "",
-        logoUpload: "",
+        layout: '',
+        buttonFill: '',
+        buttonShape: '',
+        themeColour: '',
+        themeStyle: '',
+        logoUpload: '',
       },
-      textColor: "",
-    };
+      textColor: '',
+    }
   },
   methods: {
     updateLayout(e) {
-      this.$store.commit("updateLayout", e.target.value);
+      this.$store.commit('updateLayout', e.target.value)
     },
     updateButtonFill(e) {
-      this.$store.commit("updateButtonFill", e.target.value);
+      this.$store.commit('updateButtonFill', e.target.value)
     },
     updateButtonShape(e) {
-      this.$store.commit("updateButtonShape", e.target.value);
+      this.$store.commit('updateButtonShape', e.target.value)
     },
     updateThemeColour(e) {
-      this.$store.commit("updateThemeColour", e.target.value);
-      const luminance = chroma(e.target.value).luminance();
-      if (luminance < 0.3 && this.themeStyle == "Filled") {
-        this.textColor = "#fff";
+      this.$store.commit('updateThemeColour', e.target.value)
+      const luminance = chroma(e.target.value).luminance()
+      if (luminance < 0.3 && this.themeStyle == 'Filled') {
+        this.textColor = '#fff'
       } else {
-        this.textColor = "#141414";
+        this.textColor = '#141414'
       }
     },
     updateThemeStyle(e) {
-      this.$store.commit("updateThemeStyle", e.target.value);
-      this.themeStyle = e.target.value;
+      this.$store.commit('updateThemeStyle', e.target.value)
+      this.themeStyle = e.target.value
     },
     updatelogo(e) {
-      this.$store.commit("updatelogo", e.target.value);
+      this.$store.commit('updatelogo', e.target.value)
     },
     checkContrast() {},
   },
-};
+}
 </script>
 
 <style scoped>

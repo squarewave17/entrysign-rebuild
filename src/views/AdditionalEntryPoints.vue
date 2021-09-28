@@ -47,13 +47,13 @@
 
 <script>
 // @ is an alias to /src
-import Header from "@/components/Header.vue";
-import navBar from "@/components/navBar.vue";
-import BaseInput from "@/components/BaseInput.vue";
-import Qty from "@/components/Qty.vue";
+import Header from '@/components/Header.vue'
+import navBar from '@/components/navBar.vue'
+import BaseInput from '@/components/BaseInput.vue'
+import Qty from '@/components/Qty.vue'
 
 export default {
-  name: "Additional Entry Points",
+  name: 'Additional Entry Points',
   components: {
     Header,
     navBar,
@@ -63,24 +63,24 @@ export default {
   data() {
     return {
       info: {
-        additionalRFID: "",
-        additionaDM: "",
-        additionalWM: "",
+        additionalRFID: '',
+        additionaDM: '',
+        additionalWM: '',
       },
-    };
+    }
   },
   methods: {
     updateAdditionalRFID(e) {
-      this.$store.commit("updateAdditionalRFID", e.target.value);
+      this.$store.commit('updateAdditionalRFID', e.target.value)
     },
     updateAdditionalDesk(e) {
-      this.$store.commit("updateAdditionalDesk", e.target.value);
+      this.$store.commit('updateAdditionalDesk', e.target.value)
     },
     updateAdditionalWall(e) {
-      this.$store.commit("updateAdditionalWall", e.target.value);
+      this.$store.commit('updateAdditionalWall', e.target.value)
     },
   },
-};
+}
 </script>
 
 <style scoped>

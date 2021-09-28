@@ -32,37 +32,37 @@
 </template>
 
 <script>
-import { mapState } from "vuex";
-import AppButton from "@/components/AppButton.vue";
+import { mapState } from 'vuex'
+import AppButton from '@/components/AppButton.vue'
 
 export default {
-  name: "Customiser",
+  name: 'Customiser',
   components: {
     AppButton,
   },
   data() {
-    return {};
+    return {}
   },
   props: {
     textColor: {
       type: String,
-      default: "#141414",
+      default: '#141414',
     },
   },
   computed: {
-    ...mapState(["themeColour", "themeStyle", "logoUpload"]),
+    ...mapState(['themeColour', 'themeStyle', 'logoUpload']),
     horizontal() {
       return {
-        horizontal: this.$store.state.layout == "Horizontal",
-      };
+        horizontal: this.$store.state.layout == 'Horizontal',
+      }
     },
     pageStyle() {
       return {
-        filled: this.$store.state.themeStyle == "Filled",
-      };
+        filled: this.$store.state.themeStyle == 'Filled',
+      }
     },
   },
-};
+}
 </script>
 
 <style scoped>

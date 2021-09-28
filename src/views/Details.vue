@@ -57,12 +57,12 @@
 
 <script>
 // @ is an alias to /src
-import Header from "@/components/Header.vue";
-import navBar from "@/components/navBar.vue";
-import BaseInput from "@/components/BaseInput.vue";
+import Header from '@/components/Header.vue'
+import navBar from '@/components/navBar.vue'
+import BaseInput from '@/components/BaseInput.vue'
 
 export default {
-  name: "Details",
+  name: 'Details',
   components: {
     Header,
     navBar,
@@ -71,34 +71,34 @@ export default {
   data() {
     return {
       info: {
-        firstName: "",
-        lastName: "",
-        orgName: "",
-        postcode: "",
-        contactNumber: "",
-        contactEmail: "",
+        firstName: '',
+        lastName: '',
+        orgName: '',
+        postcode: '',
+        contactNumber: '',
+        contactEmail: '',
       },
-    };
+    }
   },
   methods: {
     updateFirstName(e) {
-      this.$store.commit("updateFirstName", e.target.value);
+      this.$store.commit('updateFirstName', e.target.value)
     },
     updateLastName(e) {
-      this.$store.commit("updateLastName", e.target.value);
+      this.$store.commit('updateLastName', e.target.value)
     },
     updateOrgName(e) {
-      this.$store.commit("updateOrgName", e.target.value);
+      this.$store.commit('updateOrgName', e.target.value)
     },
     updatePostcode(e) {
-      this.$store.commit("updatePostcode", e.target.value);
+      this.$store.commit('updatePostcode', e.target.value)
     },
     updateContactNumber(e) {
-      this.$store.commit("updateContactNumber", e.target.value);
+      this.$store.commit('updateContactNumber', e.target.value)
     },
     updateContactEmail(e) {
-      this.$store.commit("updateContactEmail", e.target.value);
+      this.$store.commit('updateContactEmail', e.target.value)
     },
   },
-};
+}
 </script>

@@ -10,14 +10,14 @@ export default {
   props: {
     icon: {
       type: Image,
-      default: "",
+      default: '',
     },
     text: {
       type: [String, Number],
-      default: "",
+      default: '',
     },
   },
-};
+}
 </script>
 
 <style scoped>

@@ -18,7 +18,7 @@
 </template>
 
 <script>
-import BaseRadio from "@/components/BaseRadio";
+import BaseRadio from '@/components/BaseRadio'
 export default {
   components: {
     BaseRadio,
@@ -41,7 +41,7 @@ export default {
       default: false,
     },
   },
-};
+}
 </script>
 
 <style scoped>

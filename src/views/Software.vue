@@ -13,12 +13,12 @@
 
 <script>
 // @ is an alias to /src
-import Header from "@/components/Header.vue";
-import navBar from "@/components/navBar.vue";
-import BaseSelect from "@/components/BaseSelect.vue";
+import Header from '@/components/Header.vue'
+import navBar from '@/components/navBar.vue'
+import BaseSelect from '@/components/BaseSelect.vue'
 
 export default {
-  name: "Software",
+  name: 'Software',
   components: {
     Header,
     navBar,
@@ -27,25 +27,25 @@ export default {
   data() {
     return {
       misoptions: [
-        "Capita SIMS",
-        "Arbor",
-        "isams",
-        "Advanced Progresso",
-        "ScholarPack",
-        "BromCom",
-        "RM Integris",
-        "Other",
-        "None",
+        'Capita SIMS',
+        'Arbor',
+        'isams',
+        'Advanced Progresso',
+        'ScholarPack',
+        'BromCom',
+        'RM Integris',
+        'Other',
+        'None',
       ],
       info: {
-        misSystem: "",
+        misSystem: '',
       },
-    };
+    }
   },
   methods: {
     updateMisSystem(e) {
-      this.$store.commit("updateMisSystem", e.target.value);
+      this.$store.commit('updateMisSystem', e.target.value)
     },
   },
-};
+}
 </script>
